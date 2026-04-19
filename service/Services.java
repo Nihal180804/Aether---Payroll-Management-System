@@ -361,8 +361,10 @@ class StatuaryDeduction {
      * ─────────────────────────────────────────────────────────────────────────
      */
     public double calculatePF(Employee emp) {
-        // TODO: return basicPay × 0.12
-        return emp.getBasicPay() * PF_RATE;
+        double pf = emp.getBasicPay() * PF_RATE;
+        System.out.printf("[PF] EmpID=%s | ₹%.2f × 12%% = ₹%.2f%n",
+                emp.getEmpID(), emp.getBasicPay(), pf);
+        return pf;
     }
 
     /**
