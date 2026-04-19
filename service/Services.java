@@ -5,6 +5,15 @@ import model.Employee;
 import model.PayrollRecord;
 import util.AuditLogger;
 import java.util.*;
+import lib.com.pesu.expensesubsystem.integration.*;
+
+
+// Class for Java File Name
+public class Services {
+    // Keeping this empty as per your requirement.
+    // This class exists so the file can be named Services.java.
+}
+
 
 // =============================================================================
 // SERVICE: LossOfPayTracker
@@ -104,8 +113,24 @@ class BonusDistributor {
      * ─────────────────────────────────────────────────────────────────────────
      */
     public double calculateBonus(Employee emp, PayrollRecord record) {
-        // TODO: Look up grade, handle missing rating, return bonus amount
-        return 0.0; // REMOVE once implemented
+    Double rate = BONUS_RATE.get(emp.getGradeLevel());
+
+    if (rate == null) {
+        // We create the exception object but we DO NOT 'throw' it.
+        // This is because we want to log it and keep moving.
+        PayrollException.MissingPerformanceRating e = 
+            new PayrollException.MissingPerformanceRating(emp.getEmpID());
+
+        // Use the exception's message for the log
+        auditLogger.logWarning(emp.getEmpID(), e.getMessage());
+        
+        // Apply the safety-net (Requirement #4: Exception Handling)
+        record.setBonusArrears(emp.getBasicPay() * 0.05);
+        
+        return 0.0;
+    }
+
+    return emp.getBasicPay() * rate;
     }
 }
 
@@ -123,12 +148,48 @@ class BonusDistributor {
  *   DUPLICATE_CLAIM_ID  (MINOR)   → reject, notify, return 0.0
  *   EXCEEDS_CLAIM_LIMIT (WARNING) → cap at grade limit, notify, return maxLimit
  */
+
+
+/**
+ * The Interface provided by the Expense Management Team.
+ * DO NOT CHANGE THIS - This is the contract.
+ */
+interface ExpenseDataProvider {
+    List<ApprovedClaimDTO> getApprovedClaimsForPayroll();
+}
+
+/**
+ * PROVISION FOR MOCK DATA
+ * Use this class to test your ReimbursementTracker.
+ */
+class MockExpenseProvider implements ExpenseDataProvider {
+    @Override
+    public List<ApprovedClaimDTO> getApprovedClaimsForPayroll() {
+        List<ApprovedClaimDTO> mockList = new ArrayList<>();
+        
+        // Simulating an approved claim for a test employee
+        ApprovedClaimDTO claim1 = new ApprovedClaimDTO();
+        claim1.empID = "EMP001";
+        claim1.approvedAmount = 12000.0;
+        
+        mockList.add(claim1);
+        return mockList;
+    }
+}
+
+/**
+ * DTO for claim data transfer
+ */
+class ApprovedClaimDTO {
+    public String empID;
+    public double approvedAmount;
+}
+
 class ReimbursementTracker {
-
     private final AuditLogger auditLogger;
-    private final Set<String> processedClaimIDs = new HashSet<>(); // Tracks processed claims
+    private final Set<String> processedClaimIDs = new HashSet<>();
+    private final ExpenseDataProvider expenseProvider;
 
-    // Max reimbursement ceiling per grade
     private static final Map<String, Double> GRADE_LIMITS = new HashMap<>();
     static {
         GRADE_LIMITS.put("L1", 5_000.0);
@@ -138,8 +199,10 @@ class ReimbursementTracker {
         GRADE_LIMITS.put("L5", 50_000.0);
     }
 
-    ReimbursementTracker(AuditLogger auditLogger) {
+    // The Constructor now accepts the provider (Dependency Injection)
+    public ReimbursementTracker(AuditLogger auditLogger, ExpenseDataProvider provider) {
         this.auditLogger = auditLogger;
+        this.expenseProvider = provider;
     }
 
     /**
@@ -165,11 +228,46 @@ class ReimbursementTracker {
      *   6. Return approved
      * ─────────────────────────────────────────────────────────────────────────
      */
+
+    // Inside your ReimbursementTracker class
     public double getApprovedReimbursement(Employee emp, PayrollRecord record) {
-        // TODO: Duplicate check → limit check → mark processed → return approved
-        return 0.0; // REMOVE once implemented
+        String claimID = emp.getEmpID() + "-" + record.getPayPeriod();
+
+        // 1. Duplicate Check (using your Exception)
+        if (processedClaimIDs.contains(claimID)) {
+            PayrollException.DuplicateClaimId ex = new PayrollException.DuplicateClaimId(emp.getEmpID(), claimID);
+            auditLogger.logWarning(emp.getEmpID(), ex.getMessage());
+            return 0.0;
+        }
+
+        double amountFound = 0.0;
+        
+        // 2. Call the Expense Team's System
+        // This calls their compiled code which connects to their data
+        List<ApprovedClaimDTO> claims = expenseProvider.getApprovedClaimsForPayroll(); 
+
+        for (ApprovedClaimDTO dto : claims) {
+            // Use THEIR method names from the .class files
+            if (dto.getEmployeeId().equals(emp.getEmpID())) { 
+                // Convert their BigDecimal to a double
+                amountFound = dto.getAmount().doubleValue(); 
+                break;
+            }
+        }
+
+        // 3. Grade Limit Logic (Nehan's Ownership)
+        double maxLimit = GRADE_LIMITS.getOrDefault(emp.getGradeLevel(), 5000.0);
+        if (amountFound > maxLimit) {
+            auditLogger.logWarning(emp.getEmpID(), "EXCEEDS_CLAIM_LIMIT: Capping to " + maxLimit);
+            amountFound = maxLimit;
+        }
+
+        processedClaimIDs.add(claimID);
+        return amountFound;
     }
 }
+
+    
 
 
 // =============================================================================
@@ -266,7 +364,7 @@ class StatuaryDeduction {
      */
     public double calculatePF(Employee emp) {
         // TODO: return basicPay × 0.12
-        return 0.0; // REMOVE once implemented
+        return emp.getBasicPay()*PF_RATE;
     }
 
     /**
@@ -288,7 +386,18 @@ class StatuaryDeduction {
      */
     public double calculatePT(Employee emp) throws PayrollException.MissingWorkState {
         // TODO: Null/blank guard → lookup state → return PT or 0.0
-        return 0.0; // REMOVE once implemented
+
+            if (emp.getStateName() == null || emp.getStateName().isBlank()){
+              throw new PayrollException.MissingWorkState(emp.getEmpID());
+            }
+
+            Double pt = PT_BY_STATE.get(emp.getStateName().toUpperCase());
+
+            if (pt == null) return 0.0;
+
+            return pt; 
+
+       
     }
 }
 
