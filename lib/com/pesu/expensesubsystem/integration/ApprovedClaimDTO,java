@@ -1,0 +1,45 @@
+package com.pesu.expensesubsystem.integration;
+
+import java.math.BigDecimal;
+
+public class ApprovedClaimDTO {
+   private String claimId;
+   private String employeeId;
+   private BigDecimal amount;
+   private String approvalDate;
+
+   public ApprovedClaimDTO() {
+   }
+
+   public String getClaimId() {
+      return this.claimId;
+   }
+
+   public void setClaimId(String var1) {
+      this.claimId = var1;
+   }
+
+   public String getEmployeeId() {
+      return this.employeeId;
+   }
+
+   public void setEmployeeId(String var1) {
+      this.employeeId = var1;
+   }
+
+   public BigDecimal getAmount() {
+      return this.amount;
+   }
+
+   public void setAmount(BigDecimal var1) {
+      this.amount = var1;
+   }
+
+   public String getApprovalDate() {
+      return this.approvalDate;
+   }
+
+   public void setApprovalDate(String var1) {
+      this.approvalDate = var1;
+   }
+}
