@@ -44,8 +44,11 @@ class LossOfPayTracker {
      * ─────────────────────────────────────────────────────────────────────────
      */
     public double calculateLopDeduction(Employee emp) {
-        // TODO: Guard checks, then compute dailyRate × lopDays
-        return 0.0; // REMOVE once implemented
+        if (emp.getWorkingDaysInMonth() <= 0 || emp.getLeaveWithoutPay() <= 0) {
+            return 0.0;
+        }
+        double dailyRate = emp.getBasicPay() / emp.getWorkingDaysInMonth();
+        return dailyRate * emp.getLeaveWithoutPay();
     }
 
     /**
@@ -62,8 +65,11 @@ class LossOfPayTracker {
      * ─────────────────────────────────────────────────────────────────────────
      */
     public double calculateOvertimePay(Employee emp) {
-        // TODO: Guard, compute hourlyRate, return overtime pay
-        return 0.0; // REMOVE once implemented
+        if (emp.getOvertimeHours() <= 0 || emp.getWorkingDaysInMonth() <= 0) {
+            return 0.0;
+        }
+        double hourlyRate = emp.getBasicPay() / (emp.getWorkingDaysInMonth() * STD_HOURS_PER_DAY);
+        return hourlyRate * OVERTIME_MULTIPLIER * emp.getOvertimeHours();
     }
 }
 
@@ -299,9 +305,24 @@ class SeverancePay {
      * ─────────────────────────────────────────────────────────────────────────
      */
     public double calculateGratuity(Employee emp) {
-        // TODO: Eligibility check → compute total gratuity → cap → return monthly
-        // provision
-        return 0.0; // REMOVE once implemented
+        // 1. Eligibility check
+        if (emp.getYearsOfService() < MIN_YEARS) {
+            return 0.0;
+        }
+
+        // 2. Compute total gratuity
+        double total = (emp.getBasicPay() / DIVISOR) * DAYS_PER_YEAR * emp.getYearsOfService();
+
+        // 3. Cap at MAX_GRATUITY
+        total = Math.min(total, MAX_GRATUITY);
+
+        // Avoid division by zero if years of service is 0 (though already handled by MIN_YEARS check)
+        if (emp.getYearsOfService() <= 0) {
+            return 0.0;
+        }
+
+        // 4. Return monthly provision
+        return total / (emp.getYearsOfService() * 12);
     }
 
     /**
@@ -317,8 +338,15 @@ class SeverancePay {
      * ─────────────────────────────────────────────────────────────────────────
      */
     public double calculateFinalSettlement(Employee emp, double noticePeriodPay) {
-        // TODO: Compute full gratuity + noticePeriodPay + approvedReimbursement
-        return 0.0; // REMOVE once implemented
+        double fullGratuity = 0.0;
+        // Calculate full gratuity if eligible
+        if (emp.getYearsOfService() >= MIN_YEARS) {
+            fullGratuity = (emp.getBasicPay() / DIVISOR) * DAYS_PER_YEAR * emp.getYearsOfService();
+            fullGratuity = Math.min(fullGratuity, MAX_GRATUITY);
+        }
+
+        // Return total settlement
+        return noticePeriodPay + fullGratuity + emp.getApprovedReimbursement();
     }
 }
 
@@ -451,7 +479,7 @@ class IncomeTaxTDS {
         // Handling missing regime
         if (regime == null || regime.isBlank()) {
             PayrollException.MissingTaxRegime warning = new PayrollException.MissingTaxRegime(emp.getEmpID());
-            audiLogger.logWarning(emp.getEmpID(), warning.getMessage());
+            auditLogger.logWarning(emp.getEmpID(), warning.getMessage());
             triggerTaxRegimeReminderEmail(emp);
             regime = "OLD"; // default
         }
@@ -523,9 +551,16 @@ class DigitalPayslipGenerator {
      */
     public String generatePDF(Employee emp, PayrollRecord record)
             throws PayrollException.PayslipGenerationFailed {
-        // TODO: Build file path, simulate PDF write, call distributedViaEmail, return
-        // path
-        return null; // REMOVE once implemented
+        String fileName = "payslip_" + emp.getEmpID() + "_" + record.getPayPeriod() + ".pdf";
+        String fullPath = outputDirectory + "/" + fileName;
+
+        try {
+            simulatePdfWrite(fullPath, emp, record);
+            distributedViaEmail(emp.getEmpID(), fullPath); // Pass fullPath to the email method
+            return fullPath;
+        } catch (Exception e) {
+            throw new PayrollException.PayslipGenerationFailed(emp.getEmpID());
+        }
     }
 
     /**
@@ -540,8 +575,8 @@ class DigitalPayslipGenerator {
      * HINT: Use System.out.printf(...) — this is the simulation of email dispatch.
      * ─────────────────────────────────────────────────────────────────────────
      */
-    public void distributedViaEmail(String empId) {
-        // TODO: Print email dispatch confirmation message
+    public void distributedViaEmail(String empId, String filePath) {
+        System.out.printf("[EMAIL] Payslip sent to %s → %s%n", empId, filePath);
     }
 
     /**

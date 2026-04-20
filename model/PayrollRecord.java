@@ -136,17 +136,23 @@ public class PayrollRecord {
      * ─────────────────────────────────────────────────────────────────────────
      */
     public void calculateTotals(Employee emp) {
-        // TODO Step 1: Calculate finalGrossPay
-        // finalGrossPay = emp.getBasicPay() - penaltyAmount + overtimePay;
+        // Step 1: Calculate finalGrossPay
+        finalGrossPay = emp.getBasicPay() - penaltyAmount + overtimePay;
 
-        // TODO Step 2: Sum up all deductions
-        // double totalDeductions = pfAmount + ptAmount + monthlyTdsAmount + emp.getInsurancePremium();
+        // Step 2: Sum up all deductions
+        double totalDeductions = pfAmount + ptAmount + monthlyTdsAmount + emp.getInsurancePremium();
 
-        // TODO Step 3: Calculate netPay
-        // double netPay = finalGrossPay + payoutAmount + reimbursementPayout - totalDeductions;
+        // Step 3: Calculate netPay
+        double netPay = finalGrossPay + payoutAmount + reimbursementPayout - totalDeductions;
 
-        // TODO Step 4: Guard against negative net pay
-        // if (netPay < 0) { ... } else { finalNetPay = netPay; }
+        // Step 4: Guard against negative net pay
+        if (netPay < 0) {
+            this.arrearsDeduction = Math.abs(netPay);
+            this.finalNetPay = 0.0;
+            flagForHrReview("NEGATIVE_NET_PAY: arrears = " + this.arrearsDeduction);
+        } else {
+            this.finalNetPay = netPay;
+        }
     }
 
     @Override

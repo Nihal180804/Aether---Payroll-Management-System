@@ -92,23 +92,40 @@ public class PayRunController {
     public List<PayrollRecord> executeBatchPayroll(List<Employee> employees)
             throws PayrollException.InvalidPayPeriod {
 
-        // TODO Step 1: verifyPayPeriod(payPeriod)
+        // Step 1: verifyPayPeriod(payPeriod)
+        verifyPayPeriod(payPeriod);
 
-        // TODO Step 2: fetchAttendanceWithRetry()
+        // Step 2: fetchAttendanceWithRetry()
+        fetchAttendanceWithRetry();
 
         List<PayrollRecord> completedRecords = new ArrayList<>();
         List<String>        skippedEmployees = new ArrayList<>();
 
-        // TODO Step 3: Loop through employees
+        // Step 3: Loop through employees
         for (Employee emp : employees) {
-            // TODO 3a: Create PayrollRecord
+            // 3a: Create PayrollRecord
+            String recordID = batchID + "-" + emp.getEmpID();
+            PayrollRecord record = new PayrollRecord(recordID, emp.getEmpID(), batchID, payPeriod);
 
-            // TODO 3b & 3c & 3d: try { facade.processEmployee(...) } catch (...)
+            // 3b & 3c & 3d: try { facade.processEmployee(...) } catch (...)
+            try {
+                facade.processEmployee(emp, record);
+                completedRecords.add(record);
+            } catch (PayrollException.MissingWorkState e) {
+                record.flagForHrReview(e.getExceptionName());
+                auditLogger.logMajorError(emp.getEmpID(), e.getExceptionName() + ": " + e.getMessage());
+                skippedEmployees.add(emp.getEmpID());
+            } catch (PayrollException.MissingBaseSalary e) {
+                auditLogger.logMajorError(emp.getEmpID(), e.getExceptionName() + ": " + e.getMessage());
+                skippedEmployees.add(emp.getEmpID());
+            }
         }
 
-        // TODO Step 4: Lock pay period
+        // Step 4: Lock pay period
+        processedPayPeriods.add(payPeriod);
 
-        // TODO Step 5: Print summary (how many processed, how many skipped)
+        // Step 5: Print summary
+        System.out.printf("[BATCH] Summary: %d processed, %d skipped.%n", completedRecords.size(), skippedEmployees.size());
 
         return completedRecords;
     }
@@ -127,8 +144,8 @@ public class PayRunController {
      * ─────────────────────────────────────────────────────────────────────────
      */
     public boolean verifyCalculations() {
-        // TODO: Print verification message and return true
-        return false; // REMOVE once implemented
+        System.out.println("[VERIFY] Calculations verified.");
+        return true;
     }
 
     /**
@@ -137,10 +154,11 @@ public class PayRunController {
      */
     private void verifyPayPeriod(String payPeriod) throws PayrollException.InvalidPayPeriod {
         if (payPeriod == null || payPeriod.isBlank()) {
-            throw new PayrollException.InvalidPayPeriod("null");
+            throw new PayrollException.InvalidPayPeriod("Pay period cannot be null or blank.");
         }
-        // TODO: Check if payPeriod is in processedPayPeriods
-        //       If yes → throw new PayrollException.InvalidPayPeriod(payPeriod)
+        if (processedPayPeriods.contains(payPeriod)) {
+            throw new PayrollException.InvalidPayPeriod("Payroll has already been run for period: " + payPeriod);
+        }
     }
 
     /**
@@ -167,6 +185,21 @@ public class PayRunController {
      * ─────────────────────────────────────────────────────────────────────────
      */
     private void fetchAttendanceWithRetry() {
-        // TODO: Retry loop for attendance fetch
+        int attempts = 0;
+        while (attempts < MAX_ATTENDANCE_RETRIES) {
+            try {
+                System.out.printf("[ATTENDANCE] Fetching... attempt %d%n", attempts + 1);
+                // In a real application, this would be a call to an external service.
+                // To simulate failure, we could add a random exception throw.
+                // For this implementation, we assume it succeeds on the first try.
+                return; // Success
+            } catch (Exception e) { // This would be a specific timeout exception
+                attempts++;
+                auditLogger.logWarning(batchID, "ATTENDANCE_LOG_TIMEOUT retry " + attempts);
+                if (attempts >= MAX_ATTENDANCE_RETRIES) {
+                    System.err.println("[ALERT] Admin: Upload attendance CSV manually.");
+                }
+            }
+        }
     }
 }

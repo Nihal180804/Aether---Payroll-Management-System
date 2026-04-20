@@ -48,7 +48,13 @@ public class AuditLogger {
      * ─────────────────────────────────────────────────────────────────────────
      */
     public void log(PayrollRecord record, String actionType, String performedBy) {
-        // TODO: Format and store the audit log entry
+        String timestamp = LocalDateTime.now().format(FMT);
+        String entry = String.format(
+            "[AUDIT] %s | RecordID=%s | EmpID=%s | Action=%s | By=%s",
+            timestamp, record.getRecordID(), record.getEmpID(), actionType, performedBy
+        );
+        logEntries.add(entry);
+        System.out.println(entry);
     }
 
     /**
@@ -61,7 +67,13 @@ public class AuditLogger {
      * ─────────────────────────────────────────────────────────────────────────
      */
     public void logWarning(String empID, String message) {
-        // TODO: Format and store warning entry, print to System.out
+        String timestamp = LocalDateTime.now().format(FMT);
+        String entry = String.format(
+            "[WARN] %s | EmpID=%s | %s",
+            timestamp, empID, message
+        );
+        logEntries.add(entry);
+        System.out.println(entry);
     }
 
     /**
@@ -75,7 +87,13 @@ public class AuditLogger {
      * ─────────────────────────────────────────────────────────────────────────
      */
     public void logMajorError(String empID, String reason) {
-        // TODO: Format and store error entry, print to System.err
+        String timestamp = LocalDateTime.now().format(FMT);
+        String entry = String.format(
+            "[ERROR] %s | EmpID=%s | MAJOR → %s",
+            timestamp, empID, reason
+        );
+        logEntries.add(entry);
+        System.err.println(entry);
     }
 
     /**
