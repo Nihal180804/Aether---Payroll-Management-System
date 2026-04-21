@@ -1,10 +1,16 @@
 package com.payroll.system.service;
 
+import com.hrms.succession.facade.SuccessionBonusFacade;
+import com.hrms.succession.dto.SuccessionBonusDTO;
 import com.payroll.system.exception.PayrollException;
 import com.payroll.system.model.Employee;
 import com.payroll.system.model.PayrollRecord;
 import com.payroll.system.util.AuditLogger;
 import com.payroll.system.pattern.*;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 // Class for Java File Name
@@ -86,6 +92,8 @@ class LossOfPayTracker {
 class BonusDistributor {
 
     private final AuditLogger auditLogger;
+    private final SuccessionBonusFacade successionFacade;
+    private static final int TEMP_ROLE_ID = 101;
 
     // Bonus rate per grade (% of basicPay)
     // e.g. L3 employee gets 12% of basicPay as bonus
@@ -98,8 +106,9 @@ class BonusDistributor {
         BONUS_RATE.put("L5", 0.20);
     }
 
-    BonusDistributor(AuditLogger auditLogger) {
+    BonusDistributor(AuditLogger auditLogger, SuccessionBonusFacade successionFacade) {
         this.auditLogger = auditLogger;
+        this.successionFacade = successionFacade;
     }
 
     /**
@@ -133,7 +142,44 @@ class BonusDistributor {
             return 0.0;
         }
 
-        return emp.getBasicPay() * rate;
+        double baseBonus = emp.getBasicPay() * rate;
+        double criticalityBonus = 0.0;
+        double retentionRiskBonus = 0.0;
+        double potentialReward = 0.0;
+        double futureLeaderIncentive = 0.0;
+
+        Integer roleId = emp.getRoleId() != null ? emp.getRoleId() : TEMP_ROLE_ID;
+        SuccessionBonusDTO metrics = successionFacade.getBonusInputs(emp.getEmpID(), roleId);
+        if (metrics != null) {
+            if (metrics.getCriticality() != null && metrics.getCriticality().equalsIgnoreCase("Critical")) {
+                criticalityBonus = baseBonus * 0.10;
+            }
+            if (metrics.getRiskLevel() != null && metrics.getRiskLevel().equalsIgnoreCase("High")) {
+                retentionRiskBonus = baseBonus * 0.15;
+            }
+            if (metrics.getAppraisalScore() > 90 && metrics.getReadinessScore() > 80) {
+                potentialReward = 2500.0;
+            }
+            if (metrics.getSuccessorRank() == 1) {
+                futureLeaderIncentive = 5000.0;
+            }
+        }
+
+        double finalBonus = baseBonus + criticalityBonus + retentionRiskBonus + potentialReward + futureLeaderIncentive;
+        auditLogger.log(
+                record,
+                String.format(
+                        "BONUS_BREAKDOWN base=%.2f strategic=%.2f total=%.2f [criticality=%.2f, risk=%.2f, potential=%.2f, successor=%.2f]",
+                        baseBonus,
+                        criticalityBonus + retentionRiskBonus + potentialReward + futureLeaderIncentive,
+                        finalBonus,
+                        criticalityBonus,
+                        retentionRiskBonus,
+                        potentialReward,
+                        futureLeaderIncentive),
+                "BonusDistributor");
+
+        return finalBonus;
     }
 }
 
@@ -550,14 +596,16 @@ class DigitalPayslipGenerator {
      */
     public String generatePDF(Employee emp, PayrollRecord record)
             throws PayrollException.PayslipGenerationFailed {
-        String fileName = "payslip_" + emp.getEmpID() + "_" + record.getPayPeriod() + ".pdf";
-        String fullPath = outputDirectory + "/" + fileName;
+        String fileName = "payslip_" + sanitize(emp.getEmpID()) + "_" + sanitize(record.getPayPeriod()) + ".pdf";
+        Path outputDir = Path.of(outputDirectory);
+        Path filePath = outputDir.resolve(fileName);
 
         try {
-            simulatePdfWrite(fullPath, emp, record);
-            distributedViaEmail(emp.getEmpID(), fullPath); // Pass fullPath to the email method
-            return fullPath;
-        } catch (Exception e) {
+            Files.createDirectories(outputDir);
+            writePayslipFile(filePath, emp, record);
+            distributedViaEmail(emp.getEmpID(), filePath.toAbsolutePath().toString());
+            return filePath.toAbsolutePath().toString();
+        } catch (IOException e) {
             throw new PayrollException.PayslipGenerationFailed(emp.getEmpID());
         }
     }
@@ -576,6 +624,76 @@ class DigitalPayslipGenerator {
      */
     public void distributedViaEmail(String empId, String filePath) {
         System.out.printf("[EMAIL] Payslip sent to %s → %s%n", empId, filePath);
+    }
+
+    private void writePayslipFile(Path filePath, Employee emp, PayrollRecord record) throws IOException {
+        String content = """
+                ==================================================
+                         AETHER PAYROLL SOLUTIONS
+                ==================================================
+                Employee ID      : %s
+                Employee Name    : %s
+                Department       : %s
+                Pay Period       : %s
+                Record ID        : %s
+                Batch ID         : %s
+                --------------------------------------------------
+                Basic Pay        : INR %s
+                Overtime Pay     : INR %s
+                Bonus Payout     : INR %s
+                Reimbursement    : INR %s
+                Gratuity         : INR %s
+                --------------------------------------------------
+                PF Deduction     : INR %s
+                PT Deduction     : INR %s
+                TDS Deduction    : INR %s
+                LOP Penalty      : INR %s
+                --------------------------------------------------
+                Gross Pay        : INR %s
+                Net Pay          : INR %s
+                Bonus Arrears    : INR %s
+                Payslip Status   : %s
+                ==================================================
+                """.formatted(
+                emp.getEmpID(),
+                emp.getName(),
+                emp.getDepartment(),
+                record.getPayPeriod(),
+                record.getRecordID(),
+                record.getBatchID(),
+                money(emp.getBasicPay()),
+                money(record.getOvertimePay()),
+                money(record.getPayoutAmount()),
+                money(record.getReimbursementPayout()),
+                money(record.getGratuityAmount()),
+                money(record.getPfAmount()),
+                money(record.getPtAmount()),
+                money(record.getMonthlyTdsAmount()),
+                money(record.getPenaltyAmount()),
+                money(record.getFinalGrossPay()),
+                money(record.getFinalNetPay()),
+                money(record.getBonusArrears()),
+                record.isFlaggedForHrReview() ? "HR REVIEW REQUIRED" : "READY");
+
+        Files.writeString(filePath, content, StandardCharsets.UTF_8);
+        System.out.printf(
+                "[PDF] Writing payslip -> %s | Gross: %.2f | Net: %.2f | TDS: %.2f | PF: %.2f%n",
+                filePath.toAbsolutePath(),
+                record.getFinalGrossPay(),
+                record.getFinalNetPay(),
+                record.getMonthlyTdsAmount(),
+                record.getPfAmount());
+    }
+
+    private String sanitize(String value) {
+        if (value == null || value.isBlank()) {
+            return "unknown";
+        }
+        return value.replaceAll("[^A-Za-z0-9._-]", "_");
+    }
+
+    private String money(double value) {
+        return String.format(Locale.ROOT, "%,.2f", value);
     }
 
     /**

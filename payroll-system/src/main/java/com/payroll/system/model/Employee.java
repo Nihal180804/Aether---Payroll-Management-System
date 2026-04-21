@@ -27,6 +27,7 @@ public class Employee {
     private final String empID;
     private final String name;
     private final String department;
+    private final Integer roleId;
 
     // ── Salary & service fields ───────────────────────────────────────────────
     private final String gradeLevel;
@@ -59,6 +60,7 @@ public class Employee {
         this.empID               = b.empID;
         this.name                = b.name;
         this.department          = b.department;
+        this.roleId              = b.roleId;
         this.gradeLevel          = b.gradeLevel;
         this.basicPay            = b.basicPay;
         this.yearsOfService      = b.yearsOfService;
@@ -81,6 +83,7 @@ public class Employee {
     public String getEmpID()               { return empID; }
     public String getName()                { return name; }
     public String getDepartment()          { return department; }
+    public Integer getRoleId()             { return roleId; }
     public String getGradeLevel()          { return gradeLevel; }
     public double getBasicPay()            { return basicPay; }
     public int    getYearsOfService()      { return yearsOfService; }
@@ -133,6 +136,7 @@ public class Employee {
 
         // Optional with defaults
         private String department          = "UNKNOWN";
+        private Integer roleId             = null;
         private String gradeLevel          = "L1";
         private double basicPay            = 0.0;
         private int    yearsOfService      = 0;
@@ -156,6 +160,7 @@ public class Employee {
 
         // Fluent setters — each returns 'this' so calls can be chained
         public Builder department(String v)           { this.department = v; return this; }
+        public Builder roleId(Integer v)              { this.roleId = v; return this; }
         public Builder gradeLevel(String v)           { this.gradeLevel = v; return this; }
         public Builder basicPay(double v)             { this.basicPay = v; return this; }
         public Builder yearsOfService(int v)          { this.yearsOfService = v; return this; }

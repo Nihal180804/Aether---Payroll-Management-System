@@ -177,6 +177,7 @@ public class PayrollPresenterImpl implements PayrollPresenter {
         try {
             return new Employee.Builder(pkg.employee.empID, pkg.employee.name)
                     .department(pkg.employee.department)
+                    .roleId(pkg.employee.roleId)
                     .gradeLevel(pkg.employee.gradeLevel)
                     .basicPay(pkg.employee.basicPay)
                     .yearsOfService(pkg.employee.yearsOfService)

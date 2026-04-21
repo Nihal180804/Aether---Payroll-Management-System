@@ -1,6 +1,6 @@
 package com.payroll.system.service;
 
-
+import com.hrms.succession.facade.SuccessionBonusFacade;
 import com.payroll.system.util.AuditLogger;
 
 /**
@@ -21,13 +21,13 @@ public class PayrollSystemFactory {
      */
     public static PayrollFacade createFacade(AuditLogger auditLogger) {
         LossOfPayTracker      lopTracker          = new LossOfPayTracker();
-        BonusDistributor      bonusDistributor    = new BonusDistributor(auditLogger);
+        BonusDistributor      bonusDistributor    = new BonusDistributor(auditLogger, new SuccessionBonusFacade());
         ReimbursementTracker  reimbursementTracker = new ReimbursementTracker(auditLogger,
                                                         new MockExpenseProvider());
         SeverancePay          severancePay        = new SeverancePay();
         StatuaryDeduction     statuaryDeduction   = new StatuaryDeduction();
         IncomeTaxTDS          incomeTaxTDS        = new IncomeTaxTDS(auditLogger);
-        DigitalPayslipGenerator payslipGenerator  = new DigitalPayslipGenerator("/output/payslips");
+        DigitalPayslipGenerator payslipGenerator  = new DigitalPayslipGenerator("output/payslips");
 
         return new PayrollFacade(
                 lopTracker, bonusDistributor, reimbursementTracker,

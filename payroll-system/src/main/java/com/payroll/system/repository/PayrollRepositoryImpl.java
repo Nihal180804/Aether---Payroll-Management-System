@@ -115,6 +115,21 @@ public class PayrollRepositoryImpl implements IPayrollRepository {
                     e.emp_id,
                     e.name,
                     e.department,
+                    COALESCE(
+                        (SELECT cr.role_id
+                         FROM critical_roles cr
+                         WHERE LOWER(TRIM(COALESCE(cr.role_name, ''))) = LOWER(TRIM(COALESCE(e.role, '')))
+                         LIMIT 1),
+                        (SELECT cr.role_id
+                         FROM critical_roles cr
+                         WHERE LOWER(TRIM(COALESCE(cr.role_name, ''))) = LOWER(TRIM(COALESCE(e.designation, '')))
+                         LIMIT 1),
+                        (SELECT cr.role_id
+                         FROM critical_roles cr
+                         WHERE LOWER(TRIM(COALESCE(cr.department, ''))) = LOWER(TRIM(COALESCE(e.department, '')))
+                         ORDER BY cr.role_id
+                         LIMIT 1)
+                    ) AS resolved_role_id,
                     e.grade_level,
                     e.basic_pay,
                     e.years_of_service,
@@ -188,6 +203,8 @@ public class PayrollRepositoryImpl implements IPayrollRepository {
         dto.empID = rs.getString("emp_id");
         dto.name = rs.getString("name");
         dto.department = rs.getString("department");
+        int roleId = rs.getInt("resolved_role_id");
+        dto.roleId = rs.wasNull() ? null : roleId;
         dto.gradeLevel = rs.getString("grade_level");
         dto.basicPay = rs.getDouble("basic_pay");
         dto.yearsOfService = rs.getInt("years_of_service");
