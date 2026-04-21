@@ -61,6 +61,10 @@ public class PayrollPresenterImpl implements PayrollPresenter {
             if (pkg != null)
                 result.add(toEmployeeViewModel(pkg));
         }
+        result.sort(Comparator
+                .comparing((EmployeeViewModel vm) -> normalized(vm.department))
+                .thenComparing(vm -> normalized(vm.name))
+                .thenComparing(vm -> normalized(vm.empID)));
         return result;
     }
 
@@ -291,6 +295,10 @@ public class PayrollPresenterImpl implements PayrollPresenter {
             default -> currencyCode + " ";
         };
         return symbol + String.format("%,.2f", value);
+    }
+
+    private String normalized(String value) {
+        return value == null ? "" : value.trim().toLowerCase(Locale.ROOT);
     }
 }
 
