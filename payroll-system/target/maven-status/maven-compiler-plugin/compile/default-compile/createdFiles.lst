@@ -24,6 +24,7 @@ com\payroll\system\model\Employee.class
 com\hrms\db\repositories\payroll\AttendanceDTO.class
 com\payroll\system\exception\PayrollException$DuplicateClaimId.class
 com\payroll\system\exception\PayrollException$MissingPerformanceRating.class
+com\payroll\system\repository\PayrollRepositoryImpl.class
 com\hrms\db\repositories\payroll\EmployeeDTO.class
 com\hrms\db\repositories\payroll\FinancialsDTO.class
 com\payroll\system\model\Employee$Builder.class
