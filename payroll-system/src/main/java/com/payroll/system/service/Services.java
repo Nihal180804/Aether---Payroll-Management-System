@@ -596,7 +596,7 @@ class DigitalPayslipGenerator {
      */
     public String generatePDF(Employee emp, PayrollRecord record)
             throws PayrollException.PayslipGenerationFailed {
-        String fileName = "payslip_" + sanitize(emp.getEmpID()) + "_" + sanitize(record.getPayPeriod()) + ".pdf";
+        String fileName = "payslip_" + sanitize(emp.getEmpID()) + "_" + sanitize(record.getPayPeriod()) + ".txt";
         Path outputDir = Path.of(outputDirectory);
         Path filePath = outputDir.resolve(fileName);
 
