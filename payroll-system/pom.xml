@@ -31,6 +31,13 @@
       <artifactId>javafx-base</artifactId>
       <version>21</version>
     </dependency>
+    <dependency>
+      <groupId>com.hrms.db</groupId>
+      <artifactId>hrms-database</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/hrms-database.jar</systemPath>
+    </dependency>
   </dependencies>
 
   <build>
@@ -53,4 +60,24 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>local-succession-jar</id>
+      <activation>
+        <file>
+          <exists>${project.basedir}/lib/succession-planning-0.0.1-SNAPSHOT.jar</exists>
+        </file>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>com.hrms.succession</groupId>
+          <artifactId>succession-planning</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/succession-planning-0.0.1-SNAPSHOT.jar</systemPath>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>
