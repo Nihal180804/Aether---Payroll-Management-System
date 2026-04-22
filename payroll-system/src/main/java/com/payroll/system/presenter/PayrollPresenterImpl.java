@@ -271,12 +271,17 @@ public class PayrollPresenterImpl implements PayrollPresenter {
         PayrollResultDTO dto = new PayrollResultDTO();
         dto.empID = rec.getEmpID();
         dto.recordID = rec.getRecordID();
+        dto.payPeriod = rec.getPayPeriod();
         dto.finalGrossPay = rec.getFinalGrossPay();
         dto.finalNetPay = rec.getFinalNetPay();
         dto.penaltyAmount = rec.getPenaltyAmount();
         dto.pfAmount = rec.getPfAmount();
         dto.taxDeducted = rec.getMonthlyTdsAmount();
         dto.payoutAmount = rec.getPayoutAmount();
+        dto.overtimePay = rec.getOvertimePay();
+        dto.ptAmount = rec.getPtAmount();
+        dto.reimbursementPayout = rec.getReimbursementPayout();
+        dto.gratuityAmount = rec.getGratuityAmount();
         return dto;
     }
 

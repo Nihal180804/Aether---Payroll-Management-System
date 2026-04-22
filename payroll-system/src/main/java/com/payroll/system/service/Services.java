@@ -151,7 +151,7 @@ class BonusDistributor {
         Integer roleId = emp.getRoleId() != null ? emp.getRoleId() : TEMP_ROLE_ID;
         SuccessionBonusDTO metrics = successionFacade.getBonusInputs(emp.getEmpID(), roleId);
         if (metrics != null) {
-            if (metrics.getCriticality() != null && metrics.getCriticality().equalsIgnoreCase("Critical")) {
+            if (isCriticalRole(metrics.getCriticality())) {
                 criticalityBonus = baseBonus * 0.10;
             }
             if (metrics.getRiskLevel() != null && metrics.getRiskLevel().equalsIgnoreCase("High")) {
@@ -180,6 +180,11 @@ class BonusDistributor {
                 "BonusDistributor");
 
         return finalBonus;
+    }
+
+    private boolean isCriticalRole(String criticality) {
+        return criticality != null
+                && (criticality.equalsIgnoreCase("Critical") || criticality.equalsIgnoreCase("High"));
     }
 }
 

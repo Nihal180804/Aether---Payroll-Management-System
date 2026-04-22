@@ -38,14 +38,19 @@ public class PayrollRepositoryImpl implements IPayrollRepository {
             putIfPresent(values, columns, result.empID, "emp_id");
             putIfPresent(values, columns, batchID, "batch_id");
             putIfPresent(values, columns, result.recordID, "record_id");
+            putIfPresent(values, columns, result.payPeriod, "pay_period");
             putIfPresent(values, columns, result.finalGrossPay, "final_gross_pay", "gross_pay");
             putIfPresent(values, columns, result.finalNetPay, "final_net_pay", "net_pay");
+            putIfPresent(values, columns, result.overtimePay, "overtime_pay");
             putIfPresent(values, columns, result.penaltyAmount, "penalty_amount");
             putIfPresent(values, columns, result.pfAmount, "pf_amount");
+            putIfPresent(values, columns, result.ptAmount, "pt_amount");
             putIfPresent(values, columns, result.taxDeducted, "tax_deducted", "monthly_tds_amount", "tds_amount",
                     "tax_amount");
             putIfPresent(values, columns, result.payoutAmount, "payout_amount");
-            putIfPresent(values, columns, Timestamp.from(Instant.now()), "created_at");
+            putIfPresent(values, columns, result.reimbursementPayout, "reimbursement_payout");
+            putIfPresent(values, columns, result.gratuityAmount, "gratuity_amount");
+            putIfPresent(values, columns, Timestamp.from(Instant.now()), "created_at", "processed_at");
 
             String sql = buildInsertSql("payroll_results", values);
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -312,6 +317,6 @@ public class PayrollRepositoryImpl implements IPayrollRepository {
     private String buildInsertSql(String tableName, Map<String, Object> values) {
         String joinedColumns = String.join(", ", values.keySet());
         String placeholders = String.join(", ", java.util.Collections.nCopies(values.size(), "?"));
-        return "INSERT INTO " + tableName + " (" + joinedColumns + ") VALUES (" + placeholders + ")";
+        return "INSERT OR REPLACE INTO " + tableName + " (" + joinedColumns + ") VALUES (" + placeholders + ")";
     }
 }
