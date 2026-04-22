@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_010
+Employee Name    : Arjun Iyer
+Department       : Marketing
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_010
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 145,940.12
+Overtime Pay     : INR 8,706.65
+Bonus Payout     : INR 17,512.81
+Reimbursement    : INR 7,778.59
+Gratuity         : INR 7,016.35
+--------------------------------------------------
+PF Deduction     : INR 17,512.81
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 29,952.66
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 154,646.77
+Net Pay          : INR 131,924.62
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

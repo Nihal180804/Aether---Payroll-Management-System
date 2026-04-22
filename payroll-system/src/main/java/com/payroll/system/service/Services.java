@@ -2,6 +2,8 @@ package com.payroll.system.service;
 
 import com.hrms.succession.facade.SuccessionBonusFacade;
 import com.hrms.succession.dto.SuccessionBonusDTO;
+import com.pesu.expensesubsystem.integration.ApprovedClaimDTO;
+import com.pesu.expensesubsystem.integration.ExpenseDataProvider;
 import com.payroll.system.exception.PayrollException;
 import com.payroll.system.model.Employee;
 import com.payroll.system.model.PayrollRecord;
@@ -202,41 +204,6 @@ class BonusDistributor {
  * EXCEEDS_CLAIM_LIMIT (WARNING) → cap at grade limit, notify, return maxLimit
  */
 
-/**
- * The Interface provided by the Expense Management Team.
- * DO NOT CHANGE THIS - This is the contract.
- */
-interface ExpenseDataProvider {
-    List<ApprovedClaimDTO> getApprovedClaimsForPayroll();
-}
-
-/**
- * PROVISION FOR MOCK DATA
- * Use this class to test your ReimbursementTracker.
- */
-class MockExpenseProvider implements ExpenseDataProvider {
-    @Override
-    public List<ApprovedClaimDTO> getApprovedClaimsForPayroll() {
-        List<ApprovedClaimDTO> mockList = new ArrayList<>();
-
-        // Simulating an approved claim for a test employee
-        ApprovedClaimDTO claim1 = new ApprovedClaimDTO();
-        claim1.empID = "EMP001";
-        claim1.approvedAmount = 12000.0;
-
-        mockList.add(claim1);
-        return mockList;
-    }
-}
-
-/**
- * DTO for claim data transfer
- */
-class ApprovedClaimDTO {
-    public String empID;
-    public double approvedAmount;
-}
-
 class ReimbursementTracker {
     private final AuditLogger auditLogger;
     private final Set<String> processedClaimIDs = new HashSet<>();
@@ -301,9 +268,8 @@ class ReimbursementTracker {
         List<ApprovedClaimDTO> claims = expenseProvider.getApprovedClaimsForPayroll();
 
         for (ApprovedClaimDTO dto : claims) {
-            // Use THEIR method names from the .class files
-            if (dto.empID.equals(emp.getEmpID())) {
-                amountFound = dto.approvedAmount;
+            if (emp.getEmpID().equals(dto.getEmployeeId())) {
+                amountFound = dto.getAmount() == null ? 0.0 : dto.getAmount().doubleValue();
                 break;
             }
         }
@@ -632,7 +598,18 @@ class DigitalPayslipGenerator {
     }
 
     private void writePayslipFile(Path filePath, Employee emp, PayrollRecord record) throws IOException {
-        String content = """
+        Files.writeString(filePath, generatePayslipText(emp, record), StandardCharsets.UTF_8);
+        System.out.printf(
+                "[PDF] Writing payslip -> %s | Gross: %.2f | Net: %.2f | TDS: %.2f | PF: %.2f%n",
+                filePath.toAbsolutePath(),
+                record.getFinalGrossPay(),
+                record.getFinalNetPay(),
+                record.getMonthlyTdsAmount(),
+                record.getPfAmount());
+    }
+
+    public String generatePayslipText(Employee emp, PayrollRecord record) {
+        return """
                 ==================================================
                          AETHER PAYROLL SOLUTIONS
                 ==================================================
@@ -679,15 +656,6 @@ class DigitalPayslipGenerator {
                 money(record.getFinalNetPay()),
                 money(record.getBonusArrears()),
                 record.isFlaggedForHrReview() ? "HR REVIEW REQUIRED" : "READY");
-
-        Files.writeString(filePath, content, StandardCharsets.UTF_8);
-        System.out.printf(
-                "[PDF] Writing payslip -> %s | Gross: %.2f | Net: %.2f | TDS: %.2f | PF: %.2f%n",
-                filePath.toAbsolutePath(),
-                record.getFinalGrossPay(),
-                record.getFinalNetPay(),
-                record.getMonthlyTdsAmount(),
-                record.getPfAmount());
     }
 
     private String sanitize(String value) {

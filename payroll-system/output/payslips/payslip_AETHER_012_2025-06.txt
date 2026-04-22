@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_012
+Employee Name    : Neha Mitchell
+Department       : Finance
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_012
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 124,850.89
+Overtime Pay     : INR 6,384.42
+Bonus Payout     : INR 6,242.54
+Reimbursement    : INR 5,000.00
+Gratuity         : INR 6,002.45
+--------------------------------------------------
+PF Deduction     : INR 14,982.11
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 29,025.46
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 131,235.31
+Net Pay          : INR 96,207.22
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

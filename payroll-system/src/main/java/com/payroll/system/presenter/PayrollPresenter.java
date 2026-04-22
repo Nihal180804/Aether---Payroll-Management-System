@@ -58,5 +58,19 @@ public interface PayrollPresenter {
      * e.g. "MockDB Active" or "PostgreSQL Connected"
      */
     String getDbStatus();
-}
 
+    /**
+     * Retrieves the latest payslip for a specific employee and pay period.
+     */
+    String getEmployeePayslip(String employeeId, String payPeriod);
+
+    /**
+     * Retrieves all latest payslips for a pay period as formatted text.
+     */
+    String getAllEmployeePayslips(String payPeriod);
+
+    /**
+     * Retrieves all latest payslips for a pay period as CSV.
+     */
+    String getAllEmployeePayslipsCsv(String payPeriod);
+}

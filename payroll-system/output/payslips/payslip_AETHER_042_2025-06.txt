@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_042
+Employee Name    : Priya Sharma
+Department       : Logistics
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_042
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 173,257.39
+Overtime Pay     : INR 5,906.50
+Bonus Payout     : INR 20,790.89
+Reimbursement    : INR 7,845.49
+Gratuity         : INR 8,329.68
+--------------------------------------------------
+PF Deduction     : INR 20,790.89
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 35,764.26
+LOP Penalty      : INR 7,875.34
+--------------------------------------------------
+Gross Pay        : INR 171,288.55
+Net Pay          : INR 142,565.10
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

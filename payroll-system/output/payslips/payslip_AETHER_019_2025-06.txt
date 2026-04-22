@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_019
+Employee Name    : Ravi Krishnan
+Department       : Operations
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_019
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 123,663.18
+Overtime Pay     : INR 4,215.79
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 5,000.00
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 14,839.58
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 11,421.94
+LOP Penalty      : INR 5,621.05
+--------------------------------------------------
+Gross Pay        : INR 122,257.92
+Net Pay          : INR 98,535.79
+Bonus Arrears    : INR 6,183.16
+Payslip Status   : READY
+==================================================

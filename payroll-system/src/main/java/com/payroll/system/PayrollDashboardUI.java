@@ -20,6 +20,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -52,6 +56,7 @@ public class PayrollDashboardUI extends Application {
     private final ObservableList<EmployeeRowModel>   employeeList   = FXCollections.observableArrayList();
     private final ObservableList<PayrollRowModel>    payrollResults = FXCollections.observableArrayList();
     private final ObservableList<String>             auditLogEntries = FXCollections.observableArrayList();
+    private final ObservableList<String>             employeeNamesForSearch = FXCollections.observableArrayList();
 
     // ── UI References ─────────────────────────────────────────────────────────
     private BorderPane     root;
@@ -116,11 +121,14 @@ public class PayrollDashboardUI extends Application {
     private void loadEmployeesFromPresenter() {
         List<EmployeeViewModel> vms = presenter.loadAllEmployees(currentPayPeriod);
         employeeList.clear();
+        employeeNamesForSearch.clear();
         for (EmployeeViewModel vm : vms) {
             employeeList.add(new EmployeeRowModel(
                     vm.empID, vm.name, vm.department, vm.grade,
                     vm.basicPay, vm.country, vm.taxRegime,
-                    vm.state, vm.yearsService));
+                    vm.state, vm.yearsService, vm.leaveWithoutPay,
+                    vm.overtimeHours, vm.pendingClaims, vm.approvedReimbursement));
+            employeeNamesForSearch.add(vm.name + " (" + vm.empID + ")");
         }
     }
 
@@ -262,9 +270,11 @@ public class PayrollDashboardUI extends Application {
         // DB status card
         VBox dbCard = glassCard();
         dbCard.getChildren().addAll(
-            styledLabel("Backend Status", 13, "#94a3b8", false),
+            styledLabel("Backend & Integrations", 13, "#94a3b8", false),
             styledLabel(presenter.getDbStatus(), 18, activeColor("#22c55e", "#6366f1",
-                presenter.getDbStatus().contains("MockDB")), true)
+                presenter.getDbStatus().contains("MockDB")), true),
+            styledLabel("Payroll data is ready for batch processing and reporting.",
+                12, "#94a3b8", false)
         );
 
         content.getChildren().addAll(period, cards, actTitle, actions, dbCard);
@@ -304,6 +314,10 @@ public class PayrollDashboardUI extends Application {
             col("Department", "department", 140),
             col("Grade",      "grade",       70),
             col("Basic Pay",  "basicPay",   120),
+            col("LOP Days",   "leaveWithoutPay", 80),
+            col("OT Hours",   "overtimeHours", 90),
+            col("Pending Claims", "pendingClaims", 130),
+            col("Approved Reimb.", "approvedReimbursement", 140),
             col("Country",    "country",     70),
             col("Tax Regime", "taxRegime",  100),
             col("Work State", "state",      120),
@@ -465,11 +479,58 @@ public class PayrollDashboardUI extends Application {
         root.setPadding(new Insets(28, 32, 28, 32));
         root.setStyle("-fx-background-color: #0f1117;");
         root.setAlignment(Pos.TOP_LEFT);
+        root.setFillWidth(true);
+
+        VBox payslipCard = glassCard();
+        payslipCard.setMaxHeight(Double.MAX_VALUE);
+        VBox.setVgrow(payslipCard, Priority.ALWAYS);
+
+        Label payslipTitle = styledLabel("Payslip Viewer", 16, "#e2e8f0", true);
+
+        HBox searchRow = new HBox(10);
+        searchRow.setAlignment(Pos.CENTER_LEFT);
+        ComboBox<String> employeeSearchBox = new ComboBox<>(employeeNamesForSearch);
+        employeeSearchBox.setPromptText("Choose an employee...");
+        employeeSearchBox.setMaxWidth(Double.MAX_VALUE);
+        HBox.setHgrow(employeeSearchBox, Priority.ALWAYS);
+
+        Button viewPayslipBtn = primaryBtn("Generate Payslip");
+        Button exportAllPayslipsBtn = ghostBtn("Export All Payslips");
+        searchRow.getChildren().addAll(new Label("Employee:"), employeeSearchBox, viewPayslipBtn, exportAllPayslipsBtn);
+
+        TextArea payslipArea = new TextArea();
+        payslipArea.setEditable(false);
+        payslipArea.setFont(Font.font("Consolas", 12));
+        payslipArea.setStyle("-fx-background-color: #0d0f14; -fx-text-fill: #94a3b8; -fx-background-insets: 0;");
+        payslipArea.setMinHeight(360);
+        payslipArea.setPrefHeight(520);
+        payslipArea.setMaxHeight(Double.MAX_VALUE);
+        payslipArea.setWrapText(false);
+        payslipArea.setVisible(false);
+        payslipArea.setManaged(false);
+        VBox.setVgrow(payslipArea, Priority.ALWAYS);
+
+        payslipCard.getChildren().addAll(payslipTitle, searchRow, payslipArea);
+
+        viewPayslipBtn.setOnAction(e -> {
+            String selected = employeeSearchBox.getSelectionModel().getSelectedItem();
+            if (selected == null || !selected.contains("(")) {
+                showAlert(Alert.AlertType.WARNING, "No Employee Selected", "Please select an employee from the list.");
+                return;
+            }
+            String empId = selected.substring(selected.lastIndexOf('(') + 1, selected.lastIndexOf(')'));
+            payslipArea.setPrefHeight(420);
+            payslipArea.setText(presenter.getEmployeePayslip(empId, currentPayPeriod));
+            payslipArea.setVisible(true);
+            payslipArea.setManaged(true);
+        });
+
+        exportAllPayslipsBtn.setOnAction(e -> exportAllPayslips(payslipArea));
 
         root.getChildren().addAll(
-            styledLabel("Reports & Compliance", 18, "#e2e8f0", true),
-            styledLabel("Run payroll to generate downloadable reports.",
-                    13, "#94a3b8", false)
+            styledLabel("Reports & Payslips", 18, "#e2e8f0", true),
+            payslipCard,
+            styledLabel("Compliance Reports", 16, "#e2e8f0", true)
         );
 
         String[] reportTypes = {"Payroll Summary (PDF)", "TDS Report", "PF Report",
@@ -770,6 +831,43 @@ public class PayrollDashboardUI extends Application {
         alert.showAndWait();
     }
 
+    private void exportAllPayslips(TextArea payslipArea) {
+        try {
+            String text = presenter.getAllEmployeePayslips(currentPayPeriod);
+            String csv = presenter.getAllEmployeePayslipsCsv(currentPayPeriod);
+
+            Path exportDir = resolveExportDirectory();
+            Files.createDirectories(exportDir);
+
+            String suffix = currentPayPeriod.replaceAll("[^A-Za-z0-9_-]", "_");
+            Path textPath = exportDir.resolve("all-payslips-" + suffix + ".txt");
+            Path csvPath = exportDir.resolve("all-payslips-" + suffix + ".csv");
+
+            Files.writeString(textPath, text, StandardCharsets.UTF_8);
+            Files.writeString(csvPath, csv, StandardCharsets.UTF_8);
+
+            payslipArea.setPrefHeight(640);
+            payslipArea.setText(text);
+            payslipArea.setVisible(true);
+            payslipArea.setManaged(true);
+            updateStatusBar("Exported all payslips to " + exportDir.toAbsolutePath());
+            showAlert(Alert.AlertType.INFORMATION, "Payslips Exported",
+                    "Text export:\n" + textPath.toAbsolutePath()
+                            + "\n\nCSV export:\n" + csvPath.toAbsolutePath());
+        } catch (IOException ex) {
+            showAlert(Alert.AlertType.ERROR, "Export Failed", ex.getMessage());
+        }
+    }
+
+    private Path resolveExportDirectory() {
+        Path cwd = Path.of("").toAbsolutePath().normalize();
+        Path nestedProject = cwd.resolve("payroll-system");
+        if (Files.exists(nestedProject.resolve("pom.xml"))) {
+            return nestedProject.resolve("exports");
+        }
+        return cwd.resolve("exports");
+    }
+
     private void updateStatusBar(String msg) {
         if (statusBar != null) Platform.runLater(() -> statusBar.setText(msg));
     }
@@ -789,10 +887,13 @@ public class PayrollDashboardUI extends Application {
 
     public static class EmployeeRowModel {
         private final SimpleStringProperty empID, name, department, grade,
-                                           basicPay, country, taxRegime, state, yearsService;
+                                           basicPay, country, taxRegime, state, yearsService,
+                                           leaveWithoutPay, overtimeHours, pendingClaims, approvedReimbursement;
 
         public EmployeeRowModel(String empID, String name, String dept, String grade,
-                String basicPay, String country, String taxRegime, String state, String years) {
+                String basicPay, String country, String taxRegime, String state, String years,
+                String leaveWithoutPay, String overtimeHours, String pendingClaims,
+                String approvedReimbursement) {
             this.empID       = new SimpleStringProperty(empID);
             this.name        = new SimpleStringProperty(name);
             this.department  = new SimpleStringProperty(dept);
@@ -802,6 +903,10 @@ public class PayrollDashboardUI extends Application {
             this.taxRegime   = new SimpleStringProperty(taxRegime);
             this.state       = new SimpleStringProperty(state);
             this.yearsService = new SimpleStringProperty(years);
+            this.leaveWithoutPay = new SimpleStringProperty(leaveWithoutPay);
+            this.overtimeHours = new SimpleStringProperty(overtimeHours);
+            this.pendingClaims = new SimpleStringProperty(pendingClaims);
+            this.approvedReimbursement = new SimpleStringProperty(approvedReimbursement);
         }
 
         public String getEmpID()        { return empID.get(); }
@@ -813,6 +918,10 @@ public class PayrollDashboardUI extends Application {
         public String getTaxRegime()    { return taxRegime.get(); }
         public String getState()        { return state.get(); }
         public String getYearsService() { return yearsService.get(); }
+        public String getLeaveWithoutPay() { return leaveWithoutPay.get(); }
+        public String getOvertimeHours() { return overtimeHours.get(); }
+        public String getPendingClaims() { return pendingClaims.get(); }
+        public String getApprovedReimbursement() { return approvedReimbursement.get(); }
     }
 
     public static class PayrollRowModel {

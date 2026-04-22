@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_046
+Employee Name    : Meera Khan
+Department       : Operations
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_046
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 65,435.84
+Overtime Pay     : INR 4,461.53
+Bonus Payout     : INR 5,234.87
+Reimbursement    : INR 9,707.18
+Gratuity         : INR 3,145.95
+--------------------------------------------------
+PF Deduction     : INR 7,852.30
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 1,821.99
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 69,897.37
+Net Pay          : INR 73,790.42
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_009
+Employee Name    : Arjun Kumar
+Department       : Design
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_009
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 171,780.17
+Overtime Pay     : INR 5,856.14
+Bonus Payout     : INR 13,742.41
+Reimbursement    : INR 5,677.59
+Gratuity         : INR 8,258.66
+--------------------------------------------------
+PF Deduction     : INR 20,613.62
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 35,840.53
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 177,636.31
+Net Pay          : INR 139,559.23
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

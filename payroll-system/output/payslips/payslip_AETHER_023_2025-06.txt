@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_023
+Employee Name    : Priya Gupta
+Department       : Marketing
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_023
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 162,278.51
+Overtime Pay     : INR 11,064.44
+Bonus Payout     : INR 19,473.42
+Reimbursement    : INR 1,741.28
+Gratuity         : INR 7,801.85
+--------------------------------------------------
+PF Deduction     : INR 19,473.42
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 22,680.90
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 173,342.96
+Net Pay          : INR 151,380.09
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

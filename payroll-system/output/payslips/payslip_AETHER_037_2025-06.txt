@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_037
+Employee Name    : Arjun Krishnan
+Department       : Marketing
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_037
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 156,918.99
+Overtime Pay     : INR 6,686.89
+Bonus Payout     : INR 12,553.52
+Reimbursement    : INR 3,882.80
+Gratuity         : INR 7,544.18
+--------------------------------------------------
+PF Deduction     : INR 18,830.28
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 21,008.72
+LOP Penalty      : INR 7,132.68
+--------------------------------------------------
+Gross Pay        : INR 156,473.20
+Net Pay          : INR 130,541.00
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

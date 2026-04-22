@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_020
+Employee Name    : Ravi Malhotra
+Department       : Logistics
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_020
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 97,823.12
+Overtime Pay     : INR 5,836.04
+Bonus Payout     : INR 11,738.77
+Reimbursement    : INR 7,206.70
+Gratuity         : INR 4,703.03
+--------------------------------------------------
+PF Deduction     : INR 11,738.77
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 19,366.92
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 103,659.16
+Net Pay          : INR 89,533.19
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

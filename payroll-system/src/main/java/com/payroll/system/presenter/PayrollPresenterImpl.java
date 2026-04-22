@@ -11,6 +11,7 @@ import com.payroll.system.repository.PayrollRepositoryImpl;
 import com.payroll.system.service.PayrollFacade;
 import com.payroll.system.service.PayRunController;
 import com.payroll.system.service.PayrollSystemFactory;
+import com.payroll.system.service.PayslipExportService;
 import com.payroll.system.util.AuditLogger;
 
 import java.text.NumberFormat;
@@ -31,6 +32,7 @@ public class PayrollPresenterImpl implements PayrollPresenter {
 
     private final IPayrollRepository repo;
     private final AuditLogger auditLogger;
+    private final PayslipExportService payslipExportService;
     private PayRunController lastController;
     private String lastPayPeriod;
 
@@ -38,6 +40,7 @@ public class PayrollPresenterImpl implements PayrollPresenter {
     public PayrollPresenterImpl() {
         this.repo = new PayrollRepositoryImpl();
         this.auditLogger = new AuditLogger();
+        this.payslipExportService = new PayslipExportService(repo, auditLogger);
         auditLogger.logWarning("SYSTEM", "PayrollPresenterImpl initialized — REAL DB Active");
     }
 
@@ -45,6 +48,7 @@ public class PayrollPresenterImpl implements PayrollPresenter {
     public PayrollPresenterImpl(IPayrollRepository repo, AuditLogger auditLogger) {
         this.repo = repo;
         this.auditLogger = auditLogger;
+        this.payslipExportService = new PayslipExportService(repo, auditLogger);
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
@@ -164,8 +168,23 @@ public class PayrollPresenterImpl implements PayrollPresenter {
     @Override
     public String getDbStatus() {
         return (repo instanceof MockPayrollRepository)
-                ? "MockDB Active — 10 employees"
+                ? "MockDB Active"
                 : "Real DB Connected";
+    }
+
+    @Override
+    public String getEmployeePayslip(String employeeId, String payPeriod) {
+        return payslipExportService.getLatestPayslipText(employeeId, payPeriod);
+    }
+
+    @Override
+    public String getAllEmployeePayslips(String payPeriod) {
+        return payslipExportService.getAllLatestPayslipsAsText(payPeriod);
+    }
+
+    @Override
+    public String getAllEmployeePayslipsCsv(String payPeriod) {
+        return payslipExportService.getAllLatestPayslipsAsCsv(payPeriod);
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
@@ -215,7 +234,11 @@ public class PayrollPresenterImpl implements PayrollPresenter {
                 pkg.tax.countryCode,
                 regime.isBlank() ? "NOT SET" : regime,
                 state.isBlank() ? "NOT SET" : state,
-                pkg.employee.yearsOfService + " yr" + (pkg.employee.yearsOfService == 1 ? "" : "s"));
+                pkg.employee.yearsOfService + " yr" + (pkg.employee.yearsOfService == 1 ? "" : "s"),
+                String.valueOf(pkg.attendance.leaveWithoutPay),
+                fmt(pkg.attendance.overtimeHours),
+                fmt(pkg.financials.pendingClaims, pkg.tax.currencyCode),
+                fmt(pkg.financials.approvedReimbursement, pkg.tax.currencyCode));
     }
 
     /**
@@ -307,5 +330,4 @@ public class PayrollPresenterImpl implements PayrollPresenter {
         return value == null ? "" : value.trim().toLowerCase(Locale.ROOT);
     }
 }
-
 
