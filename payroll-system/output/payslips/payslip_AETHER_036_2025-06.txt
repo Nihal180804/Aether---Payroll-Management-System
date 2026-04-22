@@ -5,13 +5,13 @@ Employee ID      : AETHER_036
 Employee Name    : Priya Malhotra
 Department       : Design
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_036-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_036
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 113,552.83
 Overtime Pay     : INR 7,742.24
 Bonus Payout     : INR 17,032.92
-Reimbursement    : INR 0.00
+Reimbursement    : INR 279.07
 Gratuity         : INR 5,459.27
 --------------------------------------------------
 PF Deduction     : INR 13,626.34
@@ -20,7 +20,7 @@ TDS Deduction    : INR 26,313.93
 LOP Penalty      : INR 5,161.49
 --------------------------------------------------
 Gross Pay        : INR 116,133.57
-Net Pay          : INR 91,469.20
+Net Pay          : INR 91,748.27
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

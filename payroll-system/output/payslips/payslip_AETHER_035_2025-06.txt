@@ -5,13 +5,13 @@ Employee ID      : AETHER_035
 Employee Name    : Priya Gupta
 Department       : Sales
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_035-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_035
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 28,008.21
 Overtime Pay     : INR 1,670.94
 Bonus Payout     : INR 0.00
-Reimbursement    : INR 0.00
+Reimbursement    : INR 4,813.64
 Gratuity         : INR 1,346.55
 --------------------------------------------------
 PF Deduction     : INR 3,360.99
@@ -20,7 +20,7 @@ TDS Deduction    : INR 0.00
 LOP Penalty      : INR 1,273.10
 --------------------------------------------------
 Gross Pay        : INR 28,406.06
-Net Pay          : INR 24,230.55
+Net Pay          : INR 29,044.19
 Bonus Arrears    : INR 1,400.41
 Payslip Status   : READY
 ==================================================

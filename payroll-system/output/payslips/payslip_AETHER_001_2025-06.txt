@@ -5,13 +5,13 @@ Employee ID      : AETHER_001
 Employee Name    : Li Reddy
 Department       : Sales
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_001-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_001
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 87,423.26
 Overtime Pay     : INR 5,215.59
 Bonus Payout     : INR 17,484.65
-Reimbursement    : INR 0.00
+Reimbursement    : INR 1,954.21
 Gratuity         : INR 4,203.04
 --------------------------------------------------
 PF Deduction     : INR 10,490.79
@@ -20,7 +20,7 @@ TDS Deduction    : INR 4,108.69
 LOP Penalty      : INR 3,973.78
 --------------------------------------------------
 Gross Pay        : INR 88,665.07
-Net Pay          : INR 89,647.36
+Net Pay          : INR 91,601.56
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

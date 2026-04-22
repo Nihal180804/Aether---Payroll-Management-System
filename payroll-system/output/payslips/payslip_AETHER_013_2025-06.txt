@@ -5,13 +5,13 @@ Employee ID      : AETHER_013
 Employee Name    : Priya Smith
 Department       : Design
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_013-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_013
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 102,573.95
 Overtime Pay     : INR 0.00
 Bonus Payout     : INR 15,386.09
-Reimbursement    : INR 0.00
+Reimbursement    : INR 4,174.86
 Gratuity         : INR 0.00
 --------------------------------------------------
 PF Deduction     : INR 12,308.87
@@ -20,7 +20,7 @@ TDS Deduction    : INR 11,330.24
 LOP Penalty      : INR 0.00
 --------------------------------------------------
 Gross Pay        : INR 102,573.95
-Net Pay          : INR 92,145.33
+Net Pay          : INR 96,320.19
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

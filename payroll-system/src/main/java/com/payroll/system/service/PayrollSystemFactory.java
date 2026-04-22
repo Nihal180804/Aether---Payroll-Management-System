@@ -12,6 +12,7 @@ import com.hrms.succession.service.ReadinessCalculatorService;
 import com.hrms.succession.service.RiskAnalyzerService;
 import com.hrms.succession.service.RoleService;
 import com.hrms.succession.service.SuccessorMatcherService;
+import com.pesu.expensesubsystem.integration.ExpenseDataProviderImpl;
 import com.payroll.system.util.AuditLogger;
 
 import java.lang.reflect.Field;
@@ -36,7 +37,7 @@ public class PayrollSystemFactory {
         LossOfPayTracker      lopTracker          = new LossOfPayTracker();
         BonusDistributor      bonusDistributor    = new BonusDistributor(auditLogger, createSuccessionBonusFacade());
         ReimbursementTracker  reimbursementTracker = new ReimbursementTracker(auditLogger,
-                                                        new MockExpenseProvider());
+                                                        new ExpenseDataProviderImpl());
         SeverancePay          severancePay        = new SeverancePay();
         StatuaryDeduction     statuaryDeduction   = new StatuaryDeduction();
         IncomeTaxTDS          incomeTaxTDS        = new IncomeTaxTDS(auditLogger);

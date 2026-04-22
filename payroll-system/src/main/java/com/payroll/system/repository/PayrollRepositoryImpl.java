@@ -7,6 +7,11 @@ import com.hrms.db.repositories.payroll.IPayrollRepository;
 import com.hrms.db.repositories.payroll.PayrollDataPackage;
 import com.hrms.db.repositories.payroll.PayrollResultDTO;
 import com.hrms.db.repositories.payroll.TaxContextDTO;
+import com.pesu.expensesubsystem.integration.ApprovedClaimDTO;
+import com.pesu.expensesubsystem.integration.ExpenseDataProvider;
+import com.pesu.expensesubsystem.integration.ExpenseDataProviderImpl;
+import com.pesu.leavesubsystem.integration.LeaveDataProviderImpl;
+import com.pesu.leavesubsystem.integration.LeaveDetailsDTO;
 import com.payroll.system.util.DatabaseConfig;
 
 import java.sql.Connection;
@@ -28,6 +33,8 @@ import java.util.HashSet;
 public class PayrollRepositoryImpl implements IPayrollRepository {
 
     private static final String DB_URL = DatabaseConfig.getJdbcUrl();
+    private final LeaveDataProviderImpl leaveDataProvider = new LeaveDataProviderImpl();
+    private final ExpenseDataProvider expenseDataProvider = new ExpenseDataProviderImpl();
 
     @Override
     public boolean savePayrollResult(String batchID, PayrollResultDTO result) {
@@ -188,8 +195,8 @@ public class PayrollRepositoryImpl implements IPayrollRepository {
                 PayrollDataPackage pkg = new PayrollDataPackage();
                 pkg.payPeriod = payPeriod;
                 pkg.employee = mapEmployee(rs);
-                pkg.attendance = mapAttendance(rs);
-                pkg.financials = mapFinancials(rs);
+                pkg.attendance = mapAttendance(rs, empID, payPeriod);
+                pkg.financials = mapFinancials(rs, empID);
                 pkg.tax = mapTaxContext(rs);
                 return pkg;
             }
@@ -217,22 +224,48 @@ public class PayrollRepositoryImpl implements IPayrollRepository {
         return dto;
     }
 
-    private AttendanceDTO mapAttendance(ResultSet rs) throws SQLException {
+    private AttendanceDTO mapAttendance(ResultSet rs, String empID, String payPeriod) throws SQLException {
         AttendanceDTO dto = new AttendanceDTO();
         dto.workingDaysInMonth = rs.getInt("working_days_in_month");
         dto.leaveWithPay = rs.getInt("leave_with_pay");
         dto.leaveWithoutPay = rs.getInt("leave_without_pay");
         dto.overtimeHours = rs.getDouble("overtime_hours");
         dto.hoursWorked = dto.workingDaysInMonth * 8.0;
+
+        LeaveDetailsDTO leaveDetails = leaveDataProvider.getLeaveDetailsForPayroll(empID, payPeriod, dto.workingDaysInMonth);
+        if (leaveDetails != null) {
+            dto.workingDaysInMonth = leaveDetails.getWorkingDaysInMonth() > 0
+                    ? leaveDetails.getWorkingDaysInMonth()
+                    : dto.workingDaysInMonth;
+            if (leaveDetails.getLeaveWithPay() > 0) {
+                dto.leaveWithPay = leaveDetails.getLeaveWithPay();
+            }
+            if (leaveDetails.getLeaveWithoutPay() > 0) {
+                dto.leaveWithoutPay = leaveDetails.getLeaveWithoutPay();
+            }
+            if (leaveDetails.getOvertimeHours() > 0) {
+                dto.overtimeHours = leaveDetails.getOvertimeHours();
+            }
+            dto.hoursWorked = dto.workingDaysInMonth * 8.0;
+        }
         return dto;
     }
 
-    private FinancialsDTO mapFinancials(ResultSet rs) throws SQLException {
+    private FinancialsDTO mapFinancials(ResultSet rs, String empID) throws SQLException {
         FinancialsDTO dto = new FinancialsDTO();
         dto.pendingClaims = rs.getDouble("pending_claims");
         dto.approvedReimbursement = rs.getDouble("approved_reimbursement");
         dto.insurancePremium = rs.getDouble("insurance_premium");
         dto.declaredInvestments = rs.getDouble("declared_investments");
+        double subsystemApproved = expenseDataProvider.getApprovedClaimsForPayroll().stream()
+                .filter(claim -> empID.equals(claim.getEmployeeId()))
+                .map(ApprovedClaimDTO::getAmount)
+                .filter(java.util.Objects::nonNull)
+                .mapToDouble(java.math.BigDecimal::doubleValue)
+                .sum();
+        if (subsystemApproved > 0) {
+            dto.approvedReimbursement = subsystemApproved;
+        }
         return dto;
     }
 

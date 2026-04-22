@@ -5,13 +5,13 @@ Employee ID      : AETHER_005
 Employee Name    : Amit Nair
 Department       : Legal
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_005-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_005
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 129,601.72
 Overtime Pay     : INR 9,941.04
 Bonus Payout     : INR 19,440.26
-Reimbursement    : INR 0.00
+Reimbursement    : INR 3,815.90
 Gratuity         : INR 0.00
 --------------------------------------------------
 PF Deduction     : INR 15,552.21
@@ -20,7 +20,7 @@ TDS Deduction    : INR 12,657.16
 LOP Penalty      : INR 0.00
 --------------------------------------------------
 Gross Pay        : INR 139,542.76
-Net Pay          : INR 128,300.74
+Net Pay          : INR 132,116.64
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

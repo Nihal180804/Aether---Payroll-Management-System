@@ -5,13 +5,13 @@ Employee ID      : AETHER_014
 Employee Name    : Ravi Smith
 Department       : Product
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_014-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_014
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 38,118.57
 Overtime Pay     : INR 649.75
 Bonus Payout     : INR 3,049.49
-Reimbursement    : INR 0.00
+Reimbursement    : INR 9,640.28
 Gratuity         : INR 1,832.62
 --------------------------------------------------
 PF Deduction     : INR 4,574.23
@@ -20,7 +20,7 @@ TDS Deduction    : INR 357.17
 LOP Penalty      : INR 0.00
 --------------------------------------------------
 Gross Pay        : INR 38,768.32
-Net Pay          : INR 35,568.31
+Net Pay          : INR 45,208.59
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

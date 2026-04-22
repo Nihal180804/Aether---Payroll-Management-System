@@ -11,10 +11,16 @@ public class EmployeeViewModel {
     public final String taxRegime;
     public final String state;
     public final String yearsService;
+    public final String leaveWithoutPay;
+    public final String overtimeHours;
+    public final String pendingClaims;
+    public final String approvedReimbursement;
 
     public EmployeeViewModel(String empID, String name, String department,
             String grade, String basicPay, String country,
-            String taxRegime, String state, String yearsService) {
+            String taxRegime, String state, String yearsService,
+            String leaveWithoutPay, String overtimeHours,
+            String pendingClaims, String approvedReimbursement) {
         this.empID       = empID;
         this.name        = name;
         this.department  = department;
@@ -24,6 +30,10 @@ public class EmployeeViewModel {
         this.taxRegime   = taxRegime;
         this.state       = state;
         this.yearsService = yearsService;
+        this.leaveWithoutPay = leaveWithoutPay;
+        this.overtimeHours = overtimeHours;
+        this.pendingClaims = pendingClaims;
+        this.approvedReimbursement = approvedReimbursement;
     }
 }
 

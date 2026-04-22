@@ -5,13 +5,13 @@ Employee ID      : AETHER_029
 Employee Name    : Divya Kumar
 Department       : Design
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_029-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_029
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 117,724.65
 Overtime Pay     : INR 6,020.01
 Bonus Payout     : INR 14,126.96
-Reimbursement    : INR 0.00
+Reimbursement    : INR 6,395.51
 Gratuity         : INR 5,659.84
 --------------------------------------------------
 PF Deduction     : INR 14,126.96
@@ -20,7 +20,7 @@ TDS Deduction    : INR 10,186.73
 LOP Penalty      : INR 0.00
 --------------------------------------------------
 Gross Pay        : INR 123,744.66
-Net Pay          : INR 111,109.63
+Net Pay          : INR 117,505.13
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

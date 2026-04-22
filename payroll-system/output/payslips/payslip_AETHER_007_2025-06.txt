@@ -5,13 +5,13 @@ Employee ID      : AETHER_007
 Employee Name    : Priya Iyer
 Department       : Operations
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_007-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_007
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 5,000.00
 Overtime Pay     : INR 255.68
 Bonus Payout     : INR 1,000.00
-Reimbursement    : INR 0.00
+Reimbursement    : INR 2,533.06
 Gratuity         : INR 240.38
 --------------------------------------------------
 PF Deduction     : INR 600.00
@@ -20,7 +20,7 @@ TDS Deduction    : INR 0.00
 LOP Penalty      : INR 3,409.09
 --------------------------------------------------
 Gross Pay        : INR 1,846.59
-Net Pay          : INR 506.24
+Net Pay          : INR 3,039.30
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

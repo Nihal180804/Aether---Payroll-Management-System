@@ -5,13 +5,13 @@ Employee ID      : AETHER_002
 Employee Name    : Neha Nair
 Department       : Engineering
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_002-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_002
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 65,146.33
 Overtime Pay     : INR 555.22
 Bonus Payout     : INR 5,211.71
-Reimbursement    : INR 0.00
+Reimbursement    : INR 9,281.32
 Gratuity         : INR 3,132.04
 --------------------------------------------------
 PF Deduction     : INR 7,817.56
@@ -20,7 +20,7 @@ TDS Deduction    : INR 1,791.89
 LOP Penalty      : INR 0.00
 --------------------------------------------------
 Gross Pay        : INR 65,701.56
-Net Pay          : INR 59,688.40
+Net Pay          : INR 68,969.72
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

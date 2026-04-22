@@ -5,13 +5,13 @@ Employee ID      : AETHER_040
 Employee Name    : Amit Krishnan
 Department       : Operations
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_040-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_040
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 109,989.71
 Overtime Pay     : INR 7,499.30
 Bonus Payout     : INR 8,799.18
-Reimbursement    : INR 0.00
+Reimbursement    : INR 5,052.95
 Gratuity         : INR 5,287.97
 --------------------------------------------------
 PF Deduction     : INR 13,198.76
@@ -20,7 +20,7 @@ TDS Deduction    : INR 22,043.57
 LOP Penalty      : INR 0.00
 --------------------------------------------------
 Gross Pay        : INR 117,489.00
-Net Pay          : INR 89,296.20
+Net Pay          : INR 94,349.15
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

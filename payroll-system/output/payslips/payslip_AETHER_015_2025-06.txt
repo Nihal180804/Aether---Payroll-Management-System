@@ -5,13 +5,13 @@ Employee ID      : AETHER_015
 Employee Name    : Arjun Wei
 Department       : Marketing
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_015-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_015
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 81,484.73
 Overtime Pay     : INR 6,250.25
 Bonus Payout     : INR 9,778.17
-Reimbursement    : INR 0.00
+Reimbursement    : INR 3,244.01
 Gratuity         : INR 3,917.54
 --------------------------------------------------
 PF Deduction     : INR 9,778.17
@@ -20,7 +20,7 @@ TDS Deduction    : INR 8,433.85
 LOP Penalty      : INR 0.00
 --------------------------------------------------
 Gross Pay        : INR 87,734.98
-Net Pay          : INR 77,410.54
+Net Pay          : INR 80,654.55
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

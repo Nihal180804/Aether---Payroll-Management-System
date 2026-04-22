@@ -5,13 +5,13 @@ Employee ID      : AETHER_039
 Employee Name    : Meera Reddy
 Department       : Human Resources
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_039-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_039
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 70,186.67
 Overtime Pay     : INR 598.18
 Bonus Payout     : INR 14,037.33
-Reimbursement    : INR 0.00
+Reimbursement    : INR 6,675.34
 Gratuity         : INR 0.00
 --------------------------------------------------
 PF Deduction     : INR 8,422.40
@@ -20,7 +20,7 @@ TDS Deduction    : INR 3,857.13
 LOP Penalty      : INR 0.00
 --------------------------------------------------
 Gross Pay        : INR 70,784.85
-Net Pay          : INR 71,158.11
+Net Pay          : INR 77,833.44
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

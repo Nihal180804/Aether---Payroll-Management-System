@@ -5,13 +5,13 @@ Employee ID      : AETHER_016
 Employee Name    : Priya Babu
 Department       : Logistics
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_016-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_016
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 167,029.34
 Overtime Pay     : INR 1,423.55
 Bonus Payout     : INR 0.00
-Reimbursement    : INR 0.00
+Reimbursement    : INR 5,000.00
 Gratuity         : INR 0.00
 --------------------------------------------------
 PF Deduction     : INR 20,043.52
@@ -20,7 +20,7 @@ TDS Deduction    : INR 24,163.15
 LOP Penalty      : INR 0.00
 --------------------------------------------------
 Gross Pay        : INR 168,452.89
-Net Pay          : INR 123,213.12
+Net Pay          : INR 128,213.12
 Bonus Arrears    : INR 8,351.47
 Payslip Status   : READY
 ==================================================

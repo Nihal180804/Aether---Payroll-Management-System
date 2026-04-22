@@ -5,13 +5,13 @@ Employee ID      : AETHER_008
 Employee Name    : Arjun Kumar
 Department       : Logistics
 Pay Period       : 2025-06
-Record ID        : PAYSLIP-AETHER_008-2025-06
-Batch ID         : PAYSLIP-EXPORT
+Record ID        : BATCH-2025-06-AETHER_008
+Batch ID         : BATCH-2025-06
 --------------------------------------------------
 Basic Pay        : INR 86,235.56
 Overtime Pay     : INR 1,469.92
 Bonus Payout     : INR 12,935.33
-Reimbursement    : INR 0.00
+Reimbursement    : INR 212.17
 Gratuity         : INR 0.00
 --------------------------------------------------
 PF Deduction     : INR 10,348.27
@@ -20,7 +20,7 @@ TDS Deduction    : INR 3,985.16
 LOP Penalty      : INR 0.00
 --------------------------------------------------
 Gross Pay        : INR 87,705.48
-Net Pay          : INR 84,406.95
+Net Pay          : INR 84,619.12
 Bonus Arrears    : INR 0.00
 Payslip Status   : READY
 ==================================================

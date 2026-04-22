@@ -126,7 +126,8 @@ public class PayrollDashboardUI extends Application {
             employeeList.add(new EmployeeRowModel(
                     vm.empID, vm.name, vm.department, vm.grade,
                     vm.basicPay, vm.country, vm.taxRegime,
-                    vm.state, vm.yearsService));
+                    vm.state, vm.yearsService, vm.leaveWithoutPay,
+                    vm.overtimeHours, vm.pendingClaims, vm.approvedReimbursement));
             employeeNamesForSearch.add(vm.name + " (" + vm.empID + ")");
         }
     }
@@ -269,9 +270,11 @@ public class PayrollDashboardUI extends Application {
         // DB status card
         VBox dbCard = glassCard();
         dbCard.getChildren().addAll(
-            styledLabel("Backend Status", 13, "#94a3b8", false),
+            styledLabel("Backend & Integrations", 13, "#94a3b8", false),
             styledLabel(presenter.getDbStatus(), 18, activeColor("#22c55e", "#6366f1",
-                presenter.getDbStatus().contains("MockDB")), true)
+                presenter.getDbStatus().contains("MockDB")), true),
+            styledLabel("Payroll data is ready for batch processing and reporting.",
+                12, "#94a3b8", false)
         );
 
         content.getChildren().addAll(period, cards, actTitle, actions, dbCard);
@@ -311,6 +314,10 @@ public class PayrollDashboardUI extends Application {
             col("Department", "department", 140),
             col("Grade",      "grade",       70),
             col("Basic Pay",  "basicPay",   120),
+            col("LOP Days",   "leaveWithoutPay", 80),
+            col("OT Hours",   "overtimeHours", 90),
+            col("Pending Claims", "pendingClaims", 130),
+            col("Approved Reimb.", "approvedReimbursement", 140),
             col("Country",    "country",     70),
             col("Tax Regime", "taxRegime",  100),
             col("Work State", "state",      120),
@@ -880,10 +887,13 @@ public class PayrollDashboardUI extends Application {
 
     public static class EmployeeRowModel {
         private final SimpleStringProperty empID, name, department, grade,
-                                           basicPay, country, taxRegime, state, yearsService;
+                                           basicPay, country, taxRegime, state, yearsService,
+                                           leaveWithoutPay, overtimeHours, pendingClaims, approvedReimbursement;
 
         public EmployeeRowModel(String empID, String name, String dept, String grade,
-                String basicPay, String country, String taxRegime, String state, String years) {
+                String basicPay, String country, String taxRegime, String state, String years,
+                String leaveWithoutPay, String overtimeHours, String pendingClaims,
+                String approvedReimbursement) {
             this.empID       = new SimpleStringProperty(empID);
             this.name        = new SimpleStringProperty(name);
             this.department  = new SimpleStringProperty(dept);
@@ -893,6 +903,10 @@ public class PayrollDashboardUI extends Application {
             this.taxRegime   = new SimpleStringProperty(taxRegime);
             this.state       = new SimpleStringProperty(state);
             this.yearsService = new SimpleStringProperty(years);
+            this.leaveWithoutPay = new SimpleStringProperty(leaveWithoutPay);
+            this.overtimeHours = new SimpleStringProperty(overtimeHours);
+            this.pendingClaims = new SimpleStringProperty(pendingClaims);
+            this.approvedReimbursement = new SimpleStringProperty(approvedReimbursement);
         }
 
         public String getEmpID()        { return empID.get(); }
@@ -904,6 +918,10 @@ public class PayrollDashboardUI extends Application {
         public String getTaxRegime()    { return taxRegime.get(); }
         public String getState()        { return state.get(); }
         public String getYearsService() { return yearsService.get(); }
+        public String getLeaveWithoutPay() { return leaveWithoutPay.get(); }
+        public String getOvertimeHours() { return overtimeHours.get(); }
+        public String getPendingClaims() { return pendingClaims.get(); }
+        public String getApprovedReimbursement() { return approvedReimbursement.get(); }
     }
 
     public static class PayrollRowModel {

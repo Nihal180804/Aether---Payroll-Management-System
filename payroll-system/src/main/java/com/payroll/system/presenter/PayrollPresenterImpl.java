@@ -168,7 +168,7 @@ public class PayrollPresenterImpl implements PayrollPresenter {
     @Override
     public String getDbStatus() {
         return (repo instanceof MockPayrollRepository)
-                ? "MockDB Active — 10 employees"
+                ? "MockDB Active"
                 : "Real DB Connected";
     }
 
@@ -234,7 +234,11 @@ public class PayrollPresenterImpl implements PayrollPresenter {
                 pkg.tax.countryCode,
                 regime.isBlank() ? "NOT SET" : regime,
                 state.isBlank() ? "NOT SET" : state,
-                pkg.employee.yearsOfService + " yr" + (pkg.employee.yearsOfService == 1 ? "" : "s"));
+                pkg.employee.yearsOfService + " yr" + (pkg.employee.yearsOfService == 1 ? "" : "s"),
+                String.valueOf(pkg.attendance.leaveWithoutPay),
+                fmt(pkg.attendance.overtimeHours),
+                fmt(pkg.financials.pendingClaims, pkg.tax.currencyCode),
+                fmt(pkg.financials.approvedReimbursement, pkg.tax.currencyCode));
     }
 
     /**
