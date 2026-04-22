@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_002
+Employee Name    : Neha Nair
+Department       : Engineering
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_002-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 65,146.33
+Overtime Pay     : INR 555.22
+Bonus Payout     : INR 5,211.71
+Reimbursement    : INR 0.00
+Gratuity         : INR 3,132.04
+--------------------------------------------------
+PF Deduction     : INR 7,817.56
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 1,791.89
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 65,701.56
+Net Pay          : INR 59,688.40
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

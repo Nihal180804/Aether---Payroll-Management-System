@@ -632,7 +632,18 @@ class DigitalPayslipGenerator {
     }
 
     private void writePayslipFile(Path filePath, Employee emp, PayrollRecord record) throws IOException {
-        String content = """
+        Files.writeString(filePath, generatePayslipText(emp, record), StandardCharsets.UTF_8);
+        System.out.printf(
+                "[PDF] Writing payslip -> %s | Gross: %.2f | Net: %.2f | TDS: %.2f | PF: %.2f%n",
+                filePath.toAbsolutePath(),
+                record.getFinalGrossPay(),
+                record.getFinalNetPay(),
+                record.getMonthlyTdsAmount(),
+                record.getPfAmount());
+    }
+
+    public String generatePayslipText(Employee emp, PayrollRecord record) {
+        return """
                 ==================================================
                          AETHER PAYROLL SOLUTIONS
                 ==================================================
@@ -679,15 +690,6 @@ class DigitalPayslipGenerator {
                 money(record.getFinalNetPay()),
                 money(record.getBonusArrears()),
                 record.isFlaggedForHrReview() ? "HR REVIEW REQUIRED" : "READY");
-
-        Files.writeString(filePath, content, StandardCharsets.UTF_8);
-        System.out.printf(
-                "[PDF] Writing payslip -> %s | Gross: %.2f | Net: %.2f | TDS: %.2f | PF: %.2f%n",
-                filePath.toAbsolutePath(),
-                record.getFinalGrossPay(),
-                record.getFinalNetPay(),
-                record.getMonthlyTdsAmount(),
-                record.getPfAmount());
     }
 
     private String sanitize(String value) {

@@ -7,6 +7,7 @@ import com.hrms.db.repositories.payroll.IPayrollRepository;
 import com.hrms.db.repositories.payroll.PayrollDataPackage;
 import com.hrms.db.repositories.payroll.PayrollResultDTO;
 import com.hrms.db.repositories.payroll.TaxContextDTO;
+import com.payroll.system.util.DatabaseConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,7 +27,7 @@ import java.util.HashSet;
 
 public class PayrollRepositoryImpl implements IPayrollRepository {
 
-    private static final String DB_URL = "jdbc:sqlite:hrms.db";
+    private static final String DB_URL = DatabaseConfig.getJdbcUrl();
 
     @Override
     public boolean savePayrollResult(String batchID, PayrollResultDTO result) {

@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_031
+Employee Name    : Neha Babu
+Department       : Finance
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_031-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 135,829.76
+Overtime Pay     : INR 4,630.56
+Bonus Payout     : INR 6,791.49
+Reimbursement    : INR 0.00
+Gratuity         : INR 6,530.28
+--------------------------------------------------
+PF Deduction     : INR 16,299.57
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 14,428.89
+LOP Penalty      : INR 6,174.08
+--------------------------------------------------
+Gross Pay        : INR 134,286.24
+Net Pay          : INR 108,104.77
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

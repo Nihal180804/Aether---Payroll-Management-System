@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_034
+Employee Name    : Amit Babu
+Department       : Human Resources
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_034-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 50,285.15
+Overtime Pay     : INR 1,285.70
+Bonus Payout     : INR 6,034.22
+Reimbursement    : INR 0.00
+Gratuity         : INR 2,417.56
+--------------------------------------------------
+PF Deduction     : INR 6,034.22
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 989.83
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 51,570.85
+Net Pay          : INR 49,479.03
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

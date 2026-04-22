@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_006
+Employee Name    : Priya Mitchell
+Department       : Product
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_006-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 107,324.78
+Overtime Pay     : INR 4,573.50
+Bonus Payout     : INR 5,366.24
+Reimbursement    : INR 0.00
+Gratuity         : INR 5,159.85
+--------------------------------------------------
+PF Deduction     : INR 12,878.97
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 12,267.76
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 111,898.28
+Net Pay          : INR 89,932.35
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_004
+Employee Name    : Amit Verma
+Department       : Finance
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_004-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 44,057.10
+Overtime Pay     : INR 3,379.38
+Bonus Payout     : INR 8,811.42
+Reimbursement    : INR 0.00
+Gratuity         : INR 2,118.13
+--------------------------------------------------
+PF Deduction     : INR 5,286.85
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 665.97
+LOP Penalty      : INR 2,002.60
+--------------------------------------------------
+Gross Pay        : INR 45,433.89
+Net Pay          : INR 46,962.08
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_050
+Employee Name    : Ravi Iyer
+Department       : Design
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_050-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 104,051.17
+Overtime Pay     : INR 2,660.40
+Bonus Payout     : INR 20,810.23
+Reimbursement    : INR 0.00
+Gratuity         : INR 5,002.46
+--------------------------------------------------
+PF Deduction     : INR 12,486.14
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 20,737.09
+LOP Penalty      : INR 4,729.60
+--------------------------------------------------
+Gross Pay        : INR 101,981.97
+Net Pay          : INR 87,831.63
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

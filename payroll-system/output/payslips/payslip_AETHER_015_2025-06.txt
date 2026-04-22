@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_015
+Employee Name    : Arjun Wei
+Department       : Marketing
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_015-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 81,484.73
+Overtime Pay     : INR 6,250.25
+Bonus Payout     : INR 9,778.17
+Reimbursement    : INR 0.00
+Gratuity         : INR 3,917.54
+--------------------------------------------------
+PF Deduction     : INR 9,778.17
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 8,433.85
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 87,734.98
+Net Pay          : INR 77,410.54
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

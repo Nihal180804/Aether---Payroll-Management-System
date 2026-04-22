@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_024
+Employee Name    : Suresh Sharma
+Department       : Finance
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_024-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 140,001.58
+Overtime Pay     : INR 2,386.39
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 0.00
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 16,800.19
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 32,661.63
+LOP Penalty      : INR 6,363.71
+--------------------------------------------------
+Gross Pay        : INR 136,024.26
+Net Pay          : INR 86,026.67
+Bonus Arrears    : INR 7,000.08
+Payslip Status   : READY
+==================================================

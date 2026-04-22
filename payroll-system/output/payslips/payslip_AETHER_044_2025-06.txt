@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_044
+Employee Name    : Arjun Patel
+Department       : Legal
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_044-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 152,168.16
+Overtime Pay     : INR 3,890.66
+Bonus Payout     : INR 7,608.41
+Reimbursement    : INR 0.00
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 18,260.18
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 19,526.47
+LOP Penalty      : INR 6,916.73
+--------------------------------------------------
+Gross Pay        : INR 149,142.09
+Net Pay          : INR 116,444.18
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

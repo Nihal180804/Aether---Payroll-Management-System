@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_017
+Employee Name    : Suresh Malhotra
+Department       : Human Resources
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_017-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 144,752.41
+Overtime Pay     : INR 6,168.43
+Bonus Payout     : INR 21,712.86
+Reimbursement    : INR 0.00
+Gratuity         : INR 6,959.25
+--------------------------------------------------
+PF Deduction     : INR 17,370.29
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 17,212.75
+LOP Penalty      : INR 6,579.65
+--------------------------------------------------
+Gross Pay        : INR 144,341.18
+Net Pay          : INR 130,725.38
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_033
+Employee Name    : Sarah Wei
+Department       : Human Resources
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_033-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 114,740.54
+Overtime Pay     : INR 977.90
+Bonus Payout     : INR 22,948.11
+Reimbursement    : INR 0.00
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 13,768.86
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 18,238.38
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 115,718.44
+Net Pay          : INR 104,699.81
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

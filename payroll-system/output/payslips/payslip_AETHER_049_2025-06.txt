@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_049
+Employee Name    : Meera Nair
+Department       : Product
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_049-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 129,891.22
+Overtime Pay     : INR 7,749.19
+Bonus Payout     : INR 19,483.68
+Reimbursement    : INR 0.00
+Gratuity         : INR 6,244.77
+--------------------------------------------------
+PF Deduction     : INR 15,586.95
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 12,717.37
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 137,640.42
+Net Pay          : INR 126,587.58
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

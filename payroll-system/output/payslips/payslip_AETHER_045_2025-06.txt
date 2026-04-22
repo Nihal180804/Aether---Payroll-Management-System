@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_045
+Employee Name    : Priya Reddy
+Department       : Marketing
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_045-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 87,712.77
+Overtime Pay     : INR 1,495.10
+Bonus Payout     : INR 17,542.55
+Reimbursement    : INR 0.00
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 10,525.53
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 9,008.02
+LOP Penalty      : INR 3,986.94
+--------------------------------------------------
+Gross Pay        : INR 85,220.93
+Net Pay          : INR 81,567.76
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

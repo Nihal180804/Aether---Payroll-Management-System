@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_008
+Employee Name    : Arjun Kumar
+Department       : Logistics
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_008-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 86,235.56
+Overtime Pay     : INR 1,469.92
+Bonus Payout     : INR 12,935.33
+Reimbursement    : INR 0.00
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 10,348.27
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 3,985.16
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 87,705.48
+Net Pay          : INR 84,406.95
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_043
+Employee Name    : Ravi Sharma
+Department       : Sales
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-AETHER_043-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 108,802.00
+Overtime Pay     : INR 4,636.45
+Bonus Payout     : INR 13,056.24
+Reimbursement    : INR 0.00
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 13,056.24
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 8,330.82
+LOP Penalty      : INR 4,945.55
+--------------------------------------------------
+Gross Pay        : INR 108,492.90
+Net Pay          : INR 98,214.90
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================
