@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP024
+Employee Name    : John Patel
+Department       : Logistics
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP024-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 156,305.57
+Overtime Pay     : INR 9,325.05
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 5,000.00
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 18,756.67
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 36,574.59
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 165,630.62
+Net Pay          : INR 114,081.33
+Bonus Arrears    : INR 7,815.28
+Payslip Status   : READY
+==================================================

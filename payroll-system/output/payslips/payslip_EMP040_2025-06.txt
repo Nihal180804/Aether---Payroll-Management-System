@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP040
+Employee Name    : Ayesha Sharma
+Department       : Engineering
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP040-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 60,650.61
+Overtime Pay     : INR 1,033.82
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 5,000.00
+Gratuity         : INR 2,915.89
+--------------------------------------------------
+PF Deduction     : INR 7,278.07
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 11,188.97
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 61,684.43
+Net Pay          : INR 46,645.43
+Bonus Arrears    : INR 3,032.53
+Payslip Status   : READY
+==================================================

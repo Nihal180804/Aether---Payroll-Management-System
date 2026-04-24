@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP050
+Employee Name    : Rahul Nair
+Department       : Human Resources
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP050-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 120,355.17
+Overtime Pay     : INR 8,206.03
+Bonus Payout     : INR 24,071.03
+Reimbursement    : INR 3,859.55
+Gratuity         : INR 5,786.31
+--------------------------------------------------
+PF Deduction     : INR 14,442.62
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 24,323.97
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 128,561.20
+Net Pay          : INR 115,305.59
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

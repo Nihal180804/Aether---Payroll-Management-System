@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_030
+Employee Name    : Li Mitchell
+Department       : Design
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_030
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 158,106.70
+Overtime Pay     : INR 10,780.00
+Bonus Payout     : INR 23,716.00
+Reimbursement    : INR 5,624.84
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 18,972.80
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 32,629.31
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 168,886.70
+Net Pay          : INR 144,293.46
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

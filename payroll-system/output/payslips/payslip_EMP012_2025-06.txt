@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP012
+Employee Name    : Ayesha Wei
+Department       : Logistics
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP012-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 75,511.79
+Overtime Pay     : INR 0.00
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 5,000.00
+Gratuity         : INR 3,630.37
+--------------------------------------------------
+PF Deduction     : INR 9,061.41
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 17,184.08
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 75,511.79
+Net Pay          : INR 52,180.92
+Bonus Arrears    : INR 3,775.59
+Payslip Status   : READY
+==================================================

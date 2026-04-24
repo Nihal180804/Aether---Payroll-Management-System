@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP004
+Employee Name    : Rahul Khan
+Department       : Marketing
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP004-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 144,718.01
+Overtime Pay     : INR 1,233.39
+Bonus Payout     : INR 19,971.08
+Reimbursement    : INR 9,590.66
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 17,366.16
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 17,202.02
+LOP Penalty      : INR 6,578.09
+--------------------------------------------------
+Gross Pay        : INR 139,373.31
+Net Pay          : INR 133,214.16
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP002
+Employee Name    : Ananya Reddy
+Department       : Product
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP002-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 81,450.33
+Overtime Pay     : INR 4,165.07
+Bonus Payout     : INR 7,167.63
+Reimbursement    : INR 6,798.12
+Gratuity         : INR 3,915.88
+--------------------------------------------------
+PF Deduction     : INR 9,774.04
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 3,487.50
+LOP Penalty      : INR 3,702.29
+--------------------------------------------------
+Gross Pay        : INR 81,913.11
+Net Pay          : INR 80,319.64
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

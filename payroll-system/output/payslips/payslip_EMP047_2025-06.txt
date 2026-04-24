@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP047
+Employee Name    : John Sharma
+Department       : Design
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP047-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 167,284.45
+Overtime Pay     : INR 7,128.60
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 2,689.40
+Gratuity         : INR 8,042.52
+--------------------------------------------------
+PF Deduction     : INR 20,074.13
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 24,242.75
+LOP Penalty      : INR 7,603.84
+--------------------------------------------------
+Gross Pay        : INR 166,809.21
+Net Pay          : INR 123,982.26
+Bonus Arrears    : INR 8,364.22
+Payslip Status   : READY
+==================================================

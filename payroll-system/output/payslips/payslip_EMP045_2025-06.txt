@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP045
+Employee Name    : Li Verma
+Department       : Sales
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP045-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 38,373.67
+Overtime Pay     : INR 1,962.29
+Bonus Payout     : INR 5,756.05
+Reimbursement    : INR 3,620.25
+Gratuity         : INR 1,844.89
+--------------------------------------------------
+PF Deduction     : INR 4,604.84
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 618.19
+LOP Penalty      : INR 1,744.26
+--------------------------------------------------
+Gross Pay        : INR 38,591.71
+Net Pay          : INR 41,260.50
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

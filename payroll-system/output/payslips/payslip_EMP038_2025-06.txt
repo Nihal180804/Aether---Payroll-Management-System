@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP038
+Employee Name    : Ravi Krishnan
+Department       : Sales
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP038-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 42,545.49
+Overtime Pay     : INR 2,175.62
+Bonus Payout     : INR 5,105.46
+Reimbursement    : INR 9,736.69
+Gratuity         : INR 2,045.46
+--------------------------------------------------
+PF Deduction     : INR 5,105.46
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 587.37
+LOP Penalty      : INR 1,933.89
+--------------------------------------------------
+Gross Pay        : INR 42,787.23
+Net Pay          : INR 49,960.79
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

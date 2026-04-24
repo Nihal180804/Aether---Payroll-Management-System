@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_026
+Employee Name    : Meera Reddy
+Department       : Product
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_026
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 118,912.35
+Overtime Pay     : INR 1,013.46
+Bonus Payout     : INR 23,782.47
+Reimbursement    : INR 8,137.55
+Gratuity         : INR 5,716.94
+--------------------------------------------------
+PF Deduction     : INR 14,269.48
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 10,433.77
+LOP Penalty      : INR 5,405.11
+--------------------------------------------------
+Gross Pay        : INR 114,520.70
+Net Pay          : INR 119,286.70
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

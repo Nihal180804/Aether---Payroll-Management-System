@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP049
+Employee Name    : Amit Kumar
+Department       : Legal
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP049-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 80,552.13
+Overtime Pay     : INR 686.52
+Bonus Payout     : INR 9,666.26
+Reimbursement    : INR 5,481.94
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 9,666.26
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 3,394.09
+LOP Penalty      : INR 3,661.46
+--------------------------------------------------
+Gross Pay        : INR 77,577.19
+Net Pay          : INR 77,610.54
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP028
+Employee Name    : Sarah Verma
+Department       : Product
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP028-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 48,484.03
+Overtime Pay     : INR 413.22
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 5,000.00
+Gratuity         : INR 2,330.96
+--------------------------------------------------
+PF Deduction     : INR 5,818.08
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 896.17
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 48,897.24
+Net Pay          : INR 45,194.93
+Bonus Arrears    : INR 2,424.20
+Payslip Status   : READY
+==================================================

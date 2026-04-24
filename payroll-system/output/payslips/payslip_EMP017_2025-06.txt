@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP017
+Employee Name    : John Babu
+Department       : Design
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP017-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 161,056.40
+Overtime Pay     : INR 2,745.28
+Bonus Payout     : INR 24,158.46
+Reimbursement    : INR 3,553.35
+Gratuity         : INR 7,743.10
+--------------------------------------------------
+PF Deduction     : INR 19,326.77
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 22,299.60
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 163,801.68
+Net Pay          : INR 148,459.24
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

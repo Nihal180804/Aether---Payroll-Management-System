@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP018
+Employee Name    : John Smith
+Department       : Sales
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP018-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 96,601.02
+Overtime Pay     : INR 823.30
+Bonus Payout     : INR 4,830.05
+Reimbursement    : INR 5,000.00
+Gratuity         : INR 4,644.28
+--------------------------------------------------
+PF Deduction     : INR 11,592.12
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 9,163.76
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 97,424.32
+Net Pay          : INR 83,928.10
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

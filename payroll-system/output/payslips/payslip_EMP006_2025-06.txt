@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP006
+Employee Name    : Divya Nair
+Department       : Engineering
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP006-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 123,628.78
+Overtime Pay     : INR 0.00
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 5,000.00
+Gratuity         : INR 5,943.69
+--------------------------------------------------
+PF Deduction     : INR 14,835.45
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 18,471.99
+LOP Penalty      : INR 5,619.49
+--------------------------------------------------
+Gross Pay        : INR 118,009.29
+Net Pay          : INR 88,834.14
+Bonus Arrears    : INR 6,181.44
+Payslip Status   : READY
+==================================================

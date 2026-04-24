@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP011
+Employee Name    : Ayesha Iyer
+Department       : Legal
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP011-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 139,967.18
+Overtime Pay     : INR 10,736.12
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 2,622.50
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 16,796.06
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 15,719.76
+LOP Penalty      : INR 6,362.14
+--------------------------------------------------
+Gross Pay        : INR 144,341.15
+Net Pay          : INR 113,304.96
+Bonus Arrears    : INR 6,998.36
+Payslip Status   : READY
+==================================================

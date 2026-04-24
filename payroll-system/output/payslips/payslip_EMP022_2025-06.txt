@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP022
+Employee Name    : Li Sharma
+Department       : Sales
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP022-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 27,394.80
+Overtime Pay     : INR 0.00
+Bonus Payout     : INR 4,109.22
+Reimbursement    : INR 7,516.04
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 3,287.38
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 0.00
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 27,394.80
+Net Pay          : INR 34,029.63
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

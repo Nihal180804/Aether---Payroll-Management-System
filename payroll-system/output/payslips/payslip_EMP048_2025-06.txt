@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP048
+Employee Name    : Amit Khan
+Department       : Finance
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP048-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 145,007.51
+Overtime Pay     : INR 11,122.74
+Bonus Payout     : INR 19,140.99
+Reimbursement    : INR 16.52
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 17,400.90
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 33,863.05
+LOP Penalty      : INR 6,591.25
+--------------------------------------------------
+Gross Pay        : INR 149,539.00
+Net Pay          : INR 116,720.55
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

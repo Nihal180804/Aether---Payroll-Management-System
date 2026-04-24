@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP032
+Employee Name    : Li Khan
+Department       : Logistics
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP032-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 87,099.36
+Overtime Pay     : INR 4,453.94
+Bonus Payout     : INR 10,451.92
+Reimbursement    : INR 5,082.46
+Gratuity         : INR 4,187.47
+--------------------------------------------------
+PF Deduction     : INR 10,451.92
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 4,075.00
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 91,553.30
+Net Pay          : INR 90,010.06
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

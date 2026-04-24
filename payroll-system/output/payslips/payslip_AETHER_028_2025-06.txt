@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : AETHER_028
+Employee Name    : Vikram Khan
+Department       : Marketing
+Pay Period       : 2025-06
+Record ID        : BATCH-2025-06-AETHER_028
+Batch ID         : BATCH-2025-06
+--------------------------------------------------
+Basic Pay        : INR 32,180.03
+Overtime Pay     : INR 1,645.57
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 930.08
+Gratuity         : INR 1,547.12
+--------------------------------------------------
+PF Deduction     : INR 3,861.60
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 48.36
+LOP Penalty      : INR 1,462.73
+--------------------------------------------------
+Gross Pay        : INR 32,362.87
+Net Pay          : INR 28,077.19
+Bonus Arrears    : INR 1,609.00
+Payslip Status   : READY
+==================================================

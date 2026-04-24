@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP016
+Employee Name    : Li Krishnan
+Department       : Product
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP016-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 117,690.24
+Overtime Pay     : INR 5,015.21
+Bonus Payout     : INR 15,535.11
+Reimbursement    : INR 9,949.62
+Gratuity         : INR 5,658.18
+--------------------------------------------------
+PF Deduction     : INR 14,122.83
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 10,179.57
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 122,705.45
+Net Pay          : INR 123,032.38
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

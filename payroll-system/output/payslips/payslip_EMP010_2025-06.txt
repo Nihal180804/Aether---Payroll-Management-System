@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP010
+Employee Name    : Vikram Khan
+Department       : Product
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP010-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 162,244.11
+Overtime Pay     : INR 5,531.05
+Bonus Payout     : INR 21,416.22
+Reimbursement    : INR 5,295.39
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 19,469.29
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 33,539.54
+LOP Penalty      : INR 7,374.73
+--------------------------------------------------
+Gross Pay        : INR 160,400.43
+Net Pay          : INR 132,872.86
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

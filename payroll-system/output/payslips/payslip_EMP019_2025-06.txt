@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP019
+Employee Name    : Li Iyer
+Department       : Product
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP019-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 36,896.46
+Overtime Pay     : INR 1,886.75
+Bonus Payout     : INR 3,246.89
+Reimbursement    : INR 1,452.35
+Gratuity         : INR 1,773.87
+--------------------------------------------------
+PF Deduction     : INR 4,427.57
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 293.62
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 38,783.21
+Net Pay          : INR 37,038.52
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

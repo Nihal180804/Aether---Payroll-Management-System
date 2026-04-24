@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP021
+Employee Name    : Ayesha Gupta
+Department       : Legal
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP021-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 49,671.73
+Overtime Pay     : INR 1,693.35
+Bonus Payout     : INR 2,483.59
+Reimbursement    : INR 188.92
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 5,960.61
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 1,199.46
+LOP Penalty      : INR 2,257.81
+--------------------------------------------------
+Gross Pay        : INR 49,107.28
+Net Pay          : INR 42,629.20
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

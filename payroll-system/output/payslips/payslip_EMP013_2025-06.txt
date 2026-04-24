@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP013
+Employee Name    : Rahul Mitchell
+Department       : Engineering
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP013-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 118,877.95
+Overtime Pay     : INR 7,092.15
+Bonus Payout     : INR 22,289.62
+Reimbursement    : INR 1,691.65
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 14,265.35
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 17,534.48
+LOP Penalty      : INR 5,403.54
+--------------------------------------------------
+Gross Pay        : INR 120,566.56
+Net Pay          : INR 111,890.14
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

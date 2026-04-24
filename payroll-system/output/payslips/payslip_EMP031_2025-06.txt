@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP031
+Employee Name    : Li Nair
+Department       : Legal
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP031-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 151,554.74
+Overtime Pay     : INR 5,166.64
+Bonus Payout     : INR 30,310.95
+Reimbursement    : INR 9,617.03
+Gratuity         : INR 7,286.29
+--------------------------------------------------
+PF Deduction     : INR 18,186.57
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 19,335.08
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 156,721.38
+Net Pay          : INR 157,719.52
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

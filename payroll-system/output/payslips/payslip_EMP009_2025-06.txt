@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP009
+Employee Name    : Rahul Patel
+Department       : Sales
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP009-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 85,013.45
+Overtime Pay     : INR 4,347.28
+Bonus Payout     : INR 6,801.08
+Reimbursement    : INR 2,024.24
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 10,201.61
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 8,044.13
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 89,360.73
+Net Pay          : INR 77,635.23
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================
