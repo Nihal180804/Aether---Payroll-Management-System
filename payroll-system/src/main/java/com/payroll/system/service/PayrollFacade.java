@@ -39,11 +39,11 @@ public class PayrollFacade {
     public void processEmployee(Employee emp, PayrollRecord record) {
 
         // LOP Penalty
-        double penalty = lopTracker.calculateLopDeduction(emp);
+        double penalty = lopTracker.calculateLopDeduction(emp, record);
         record.setPenaltyAmount(penalty);
 
         // Overtime Pay
-        double ot = lopTracker.calculateOvertimePay(emp);
+        double ot = lopTracker.calculateOvertimePay(emp, record);
         record.setOvertimePay(ot);
 
         // Statutory Deductions

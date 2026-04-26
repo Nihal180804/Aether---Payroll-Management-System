@@ -4,6 +4,8 @@ import com.hrms.succession.dto.SuccessionBonusDTO;
 import com.hrms.succession.facade.SuccessionBonusFacade;
 import com.pesu.expensesubsystem.integration.ApprovedClaimDTO;
 import com.pesu.expensesubsystem.integration.ExpenseDataProvider;
+import com.pesu.leavesubsystem.integration.LeaveDataProviderImpl;
+import com.pesu.leavesubsystem.integration.LeaveDetailsDTO;
 import com.payroll.system.exception.PayrollException;
 import com.payroll.system.model.Employee;
 import com.payroll.system.model.PayrollRecord;
@@ -30,21 +32,64 @@ class LossOfPayTracker {
 
     private static final double OVERTIME_MULTIPLIER = 1.5;
     private static final double STD_HOURS_PER_DAY = 8.0;
+    private final LeaveDataProviderImpl leaveDataProvider;
+
+    LossOfPayTracker() {
+        this(new LeaveDataProviderImpl());
+    }
+
+    LossOfPayTracker(LeaveDataProviderImpl leaveDataProvider) {
+        this.leaveDataProvider = leaveDataProvider;
+    }
 
     public double calculateLopDeduction(Employee emp) {
-        if (emp.getWorkingDaysInMonth() <= 0 || emp.getLeaveWithoutPay() <= 0) {
+        return calculateLopDeduction(emp, null);
+    }
+
+    public double calculateLopDeduction(Employee emp, PayrollRecord record) {
+        LeaveDetailsDTO leaveDetails = resolveLeaveDetails(emp, record);
+        int workingDaysInMonth = leaveDetails != null && leaveDetails.getWorkingDaysInMonth() > 0
+                ? leaveDetails.getWorkingDaysInMonth()
+                : emp.getWorkingDaysInMonth();
+        int leaveWithoutPay = leaveDetails != null && leaveDetails.getLeaveWithoutPay() > 0
+                ? leaveDetails.getLeaveWithoutPay()
+                : emp.getLeaveWithoutPay();
+
+        if (workingDaysInMonth <= 0 || leaveWithoutPay <= 0) {
             return 0.0;
         }
-        double dailyRate = emp.getBasicPay() / emp.getWorkingDaysInMonth();
-        return dailyRate * emp.getLeaveWithoutPay();
+        double dailyRate = emp.getBasicPay() / workingDaysInMonth;
+        return dailyRate * leaveWithoutPay;
     }
 
     public double calculateOvertimePay(Employee emp) {
-        if (emp.getOvertimeHours() <= 0 || emp.getWorkingDaysInMonth() <= 0) {
+        return calculateOvertimePay(emp, null);
+    }
+
+    public double calculateOvertimePay(Employee emp, PayrollRecord record) {
+        LeaveDetailsDTO leaveDetails = resolveLeaveDetails(emp, record);
+        int workingDaysInMonth = leaveDetails != null && leaveDetails.getWorkingDaysInMonth() > 0
+                ? leaveDetails.getWorkingDaysInMonth()
+                : emp.getWorkingDaysInMonth();
+        double overtimeHours = leaveDetails != null && leaveDetails.getOvertimeHours() > 0
+                ? leaveDetails.getOvertimeHours()
+                : emp.getOvertimeHours();
+
+        if (overtimeHours <= 0 || workingDaysInMonth <= 0) {
             return 0.0;
         }
-        double hourlyRate = emp.getBasicPay() / (emp.getWorkingDaysInMonth() * STD_HOURS_PER_DAY);
-        return hourlyRate * OVERTIME_MULTIPLIER * emp.getOvertimeHours();
+        double hourlyRate = emp.getBasicPay() / (workingDaysInMonth * STD_HOURS_PER_DAY);
+        return hourlyRate * OVERTIME_MULTIPLIER * overtimeHours;
+    }
+
+    private LeaveDetailsDTO resolveLeaveDetails(Employee emp, PayrollRecord record) {
+        if (record == null || record.getPayPeriod() == null || record.getPayPeriod().isBlank()) {
+            return null;
+        }
+        return leaveDataProvider.getLeaveDetailsForPayroll(
+                emp.getEmpID(),
+                record.getPayPeriod(),
+                emp.getWorkingDaysInMonth());
     }
 }
 
