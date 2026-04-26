@@ -15,14 +15,12 @@ import com.hrms.db.repositories.payroll.TaxContextDTO;
  * =============================================================================
  * Fully in-memory implementation of IPayrollRepository.
  * Used while the DB team's real implementation is not yet ready.
- *
  * TO SWAP TO REAL DB:
  * In PayrollPresenterImpl, change:
  * IPayrollRepository repo = new MockPayrollRepository();
  * to:
  * IPayrollRepository repo = new RealPayrollRepository(dbConnection);
  * Nothing else changes. This is Dependency Inversion Principle working.
- *
  * 10 EMPLOYEES (each exercises a specific exception path):
  * EMP001 — Happy path, India, New Regime, Karnataka
  * EMP002 — MISSING_TAX_REGIME (WARNING)
@@ -48,7 +46,6 @@ public class MockPayrollRepository implements IPayrollRepository {
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
-    // IPayrollRepository — Interface Implementation
     // ═══════════════════════════════════════════════════════════════════════════
 
     @Override
@@ -270,4 +267,5 @@ public class MockPayrollRepository implements IPayrollRepository {
         return t;
     }
 }
+
 

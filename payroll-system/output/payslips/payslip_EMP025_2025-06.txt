@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP025
+Employee Name    : Li Reddy
+Department       : Design
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP025-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 91,850.19
+Overtime Pay     : INR 7,045.33
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 2,050.61
+Gratuity         : INR 4,415.87
+--------------------------------------------------
+PF Deduction     : INR 11,022.02
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 5,553.63
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 98,895.51
+Net Pay          : INR 81,809.93
+Bonus Arrears    : INR 4,592.51
+Payslip Status   : READY
+==================================================

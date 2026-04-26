@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP020
+Employee Name    : Rahul Krishnan
+Department       : Finance
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP020-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 114,127.12
+Overtime Pay     : INR 3,890.70
+Bonus Payout     : INR 15,064.78
+Reimbursement    : INR 4,723.50
+Gratuity         : INR 5,486.88
+--------------------------------------------------
+PF Deduction     : INR 13,695.25
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 22,953.80
+LOP Penalty      : INR 5,187.60
+--------------------------------------------------
+Gross Pay        : INR 112,830.22
+Net Pay          : INR 95,321.43
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

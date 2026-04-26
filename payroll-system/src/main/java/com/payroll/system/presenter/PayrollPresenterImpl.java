@@ -8,26 +8,24 @@ import com.payroll.system.model.Employee;
 import com.payroll.system.model.PayrollRecord;
 import com.payroll.system.repository.MockPayrollRepository;
 import com.payroll.system.repository.PayrollRepositoryImpl;
-import com.payroll.system.service.PayrollFacade;
 import com.payroll.system.service.PayRunController;
+import com.payroll.system.service.PayrollFacade;
 import com.payroll.system.service.PayrollSystemFactory;
 import com.payroll.system.service.PayslipExportService;
 import com.payroll.system.util.AuditLogger;
 
-import java.text.NumberFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
-/**
- * =============================================================================
- * CLASS: PayrollPresenterImpl
- * =============================================================================
- * Implements PayrollPresenter by wiring:
- * IPayrollRepository → Employee.Builder → PayRunController → PayrollFacade
- *
- * The UI only holds a PayrollPresenter reference — it has zero knowledge of
- * model, service, pattern, or exception classes.
- * =============================================================================
- */
+/** Bridges the UI-facing presenter contract to the payroll workflow. */
 public class PayrollPresenterImpl implements PayrollPresenter {
 
     private final IPayrollRepository repo;
@@ -36,24 +34,20 @@ public class PayrollPresenterImpl implements PayrollPresenter {
     private PayRunController lastController;
     private String lastPayPeriod;
 
-    // ── Default constructor — uses real Database ──────────────────────
+    /** Creates the presenter with the database-backed repository. */
     public PayrollPresenterImpl() {
         this.repo = new PayrollRepositoryImpl();
         this.auditLogger = new AuditLogger();
         this.payslipExportService = new PayslipExportService(repo, auditLogger);
-        auditLogger.logWarning("SYSTEM", "PayrollPresenterImpl initialized — REAL DB Active");
+        auditLogger.logWarning("SYSTEM", "PayrollPresenterImpl initialized - REAL DB Active");
     }
 
-    // ── DI constructor — inject any IPayrollRepository (real DB, test stub…) ─
+    /** Creates the presenter with an injected repository, mainly for tests. */
     public PayrollPresenterImpl(IPayrollRepository repo, AuditLogger auditLogger) {
         this.repo = repo;
         this.auditLogger = auditLogger;
         this.payslipExportService = new PayslipExportService(repo, auditLogger);
     }
-
-    // ═══════════════════════════════════════════════════════════════════════════
-    // PayrollPresenter — Interface Implementation
-    // ═══════════════════════════════════════════════════════════════════════════
 
     @Override
     public List<EmployeeViewModel> loadAllEmployees(String payPeriod) {
@@ -62,8 +56,9 @@ public class PayrollPresenterImpl implements PayrollPresenter {
         List<EmployeeViewModel> result = new ArrayList<>();
         for (String id : ids) {
             PayrollDataPackage pkg = repo.fetchEmployeeData(id, payPeriod);
-            if (pkg != null)
+            if (pkg != null) {
                 result.add(toEmployeeViewModel(pkg));
+            }
         }
         result.sort(Comparator
                 .comparing((EmployeeViewModel vm) -> normalized(vm.department))
@@ -81,32 +76,29 @@ public class PayrollPresenterImpl implements PayrollPresenter {
     public BatchResult runBatch(String batchId, String payPeriod) {
         this.lastPayPeriod = payPeriod;
 
-        // 1. Fetch all employee packages
         List<String> allIds = repo.getAllActiveEmployeeIDs();
         Map<String, PayrollDataPackage> pkgMap = new LinkedHashMap<>();
         List<Employee> empList = new ArrayList<>();
 
         for (String id : allIds) {
             PayrollDataPackage pkg = repo.fetchEmployeeData(id, payPeriod);
-            if (pkg == null)
+            if (pkg == null) {
                 continue;
+            }
             pkgMap.put(id, pkg);
             Employee emp = toEmployee(pkg);
-            if (emp != null)
+            if (emp != null) {
                 empList.add(emp);
+            }
         }
 
-        // 2. Wire full backend stack
         PayrollFacade facade = PayrollSystemFactory.createFacade(auditLogger);
         PayRunController controller = new PayRunController(batchId, payPeriod, facade, auditLogger);
         this.lastController = controller;
 
         try {
-            // 3. Execute batch
             List<PayrollRecord> completed = controller.executeBatchPayroll(empList);
             List<String> auditLog = auditLogger.getAllEntries();
-
-            // 4. Map results → ViewModels
             Set<String> processedIds = new HashSet<>();
             List<PayrollResultViewModel> results = new ArrayList<>();
 
@@ -114,33 +106,30 @@ public class PayrollPresenterImpl implements PayrollPresenter {
                 processedIds.add(rec.getEmpID());
                 PayrollDataPackage pkg = pkgMap.get(rec.getEmpID());
                 String name = pkg != null ? pkg.employee.name : rec.getEmpID();
-                String dept = pkg != null ? pkg.employee.department : "—";
-                String bpay = pkg != null ? fmt(pkg.employee.basicPay, pkg.tax.currencyCode) : "—";
+                String dept = pkg != null ? pkg.employee.department : "-";
+                String bpay = pkg != null ? fmt(pkg.employee.basicPay, pkg.tax.currencyCode) : "-";
                 results.add(toPayrollResultViewModel(batchId, rec, name, dept, bpay, auditLog));
 
-                // 5. Persist result
                 PayrollResultDTO dto = toResultDTO(rec);
                 repo.savePayrollResult(batchId, dto);
             }
 
-            // 6. Add skipped employees as explicit rows
             for (String id : allIds) {
                 if (!processedIds.contains(id)) {
                     PayrollDataPackage pkg = pkgMap.get(id);
                     String name = pkg != null ? pkg.employee.name : id;
-                    String dept = pkg != null ? pkg.employee.department : "—";
-                    String bpay = pkg != null ? fmt(pkg.employee.basicPay, pkg.tax.currencyCode) : "—";
+                    String dept = pkg != null ? pkg.employee.department : "-";
+                    String bpay = pkg != null ? fmt(pkg.employee.basicPay, pkg.tax.currencyCode) : "-";
                     results.add(new PayrollResultViewModel(
                             batchId + "-" + id, id, name, dept,
-                            bpay, "—", "—", "—", "0.00",
-                            "✗ SKIPPED — MISSING_WORK_STATE"));
+                            bpay, "-", "-", "-", "0.00",
+                            "SKIPPED - MISSING_WORK_STATE"));
                     repo.logProcessingError(batchId, id, "MISSING_WORK_STATE: employee skipped from batch");
                 }
             }
 
             int skipped = allIds.size() - processedIds.size();
             return new BatchResult(results, completed.size(), skipped, null);
-
         } catch (PayrollException.InvalidPayPeriod e) {
             auditLogger.logMajorError("SYSTEM", "INVALID_PAY_PERIOD: " + e.getMessage());
             return new BatchResult(Collections.emptyList(), 0, 0,
@@ -160,16 +149,15 @@ public class PayrollPresenterImpl implements PayrollPresenter {
 
     @Override
     public boolean verifyLastBatch() {
-        if (lastController == null)
+        if (lastController == null) {
             return false;
+        }
         return lastController.verifyCalculations();
     }
 
     @Override
     public String getDbStatus() {
-        return (repo instanceof MockPayrollRepository)
-                ? "MockDB Active"
-                : "Real DB Connected";
+        return (repo instanceof MockPayrollRepository) ? "MockDB Active" : "Real DB Connected";
     }
 
     @Override
@@ -187,11 +175,7 @@ public class PayrollPresenterImpl implements PayrollPresenter {
         return payslipExportService.getAllLatestPayslipsAsCsv(payPeriod);
     }
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // Private Helpers
-    // ═══════════════════════════════════════════════════════════════════════════
-
-    /** PayrollDataPackage → Employee using Builder (validates basicPay > 0). */
+    /** Converts repository data to a validated payroll employee. */
     private Employee toEmployee(PayrollDataPackage pkg) {
         try {
             return new Employee.Builder(pkg.employee.empID, pkg.employee.name)
@@ -214,17 +198,16 @@ public class PayrollPresenterImpl implements PayrollPresenter {
                     .filingStatus(Objects.requireNonNullElse(pkg.tax.filingStatus, "SINGLE"))
                     .build();
         } catch (IllegalStateException e) {
-            auditLogger.logMajorError(pkg.employee.empID,
-                    "MISSING_BASE_SALARY: " + e.getMessage());
+            auditLogger.logMajorError(pkg.employee.empID, "MISSING_BASE_SALARY: " + e.getMessage());
             return null;
         }
     }
 
-    /** PayrollDataPackage → EmployeeViewModel. */
+    /** Converts repository data to the employee row shown in the UI. */
     private EmployeeViewModel toEmployeeViewModel(PayrollDataPackage pkg) {
         String regime = Objects.requireNonNullElse(pkg.tax.taxRegime, "");
         String state = Objects.requireNonNullElse(pkg.tax.stateName, "");
-        
+
         return new EmployeeViewModel(
                 pkg.employee.empID,
                 pkg.employee.name,
@@ -241,38 +224,35 @@ public class PayrollPresenterImpl implements PayrollPresenter {
                 fmt(pkg.financials.approvedReimbursement, pkg.tax.currencyCode));
     }
 
-    /**
-     * PayrollRecord → PayrollResultViewModel. Scans audit log for per-employee
-     * warnings.
-     */
+    /** Builds the result row and derives a user-facing status label. */
     private PayrollResultViewModel toPayrollResultViewModel(
-            String batchId, PayrollRecord rec,
-            String name, String dept, String basicPay,
-            List<String> allAuditEntries) {
+            String batchId, PayrollRecord rec, String name, String dept, String basicPay, List<String> allAuditEntries) {
 
         String status;
         if (rec.isFlaggedForHrReview()) {
             String reason = rec.getHrReviewReason();
-            if (reason != null && reason.contains("NEGATIVE_NET_PAY"))
-                status = "⚠ NEGATIVE_NET_PAY → arrears set";
-            else
-                status = "⚠ " + (reason != null ? reason : "HR Review Required");
+            if (reason != null && reason.contains("NEGATIVE_NET_PAY")) {
+                status = "NEGATIVE_NET_PAY -> arrears set";
+            } else {
+                status = reason != null ? reason : "HR Review Required";
+            }
         } else if (rec.getBonusArrears() > 0) {
-            status = "⚠ MISSING_PERFORMANCE_RATING → bonus queued";
+            status = "MISSING_PERFORMANCE_RATING -> bonus queued";
         } else {
-            // Check audit log for non-fatal warnings for this specific employee
             String warnLine = allAuditEntries.stream()
                     .filter(e -> e.contains("[WARN]") && e.contains("EmpID=" + rec.getEmpID()))
-                    .findFirst().orElse(null);
+                    .findFirst()
+                    .orElse(null);
             if (warnLine != null) {
-                if (warnLine.contains("MISSING_TAX_REGIME"))
-                    status = "⚠ MISSING_TAX_REGIME → defaulted OLD";
-                else if (warnLine.contains("EXCEEDS_CLAIM_LIMIT"))
-                    status = "⚠ EXCEEDS_CLAIM_LIMIT → claim capped";
-                else
-                    status = "⚠ Warning (see Audit Log)";
+                if (warnLine.contains("MISSING_TAX_REGIME")) {
+                    status = "MISSING_TAX_REGIME -> defaulted OLD";
+                } else if (warnLine.contains("EXCEEDS_CLAIM_LIMIT")) {
+                    status = "EXCEEDS_CLAIM_LIMIT -> claim capped";
+                } else {
+                    status = "Warning (see Audit Log)";
+                }
             } else {
-                status = "✔ OK";
+                status = "OK";
             }
         }
 
@@ -289,7 +269,7 @@ public class PayrollPresenterImpl implements PayrollPresenter {
                 status);
     }
 
-    /** PayrollRecord → PayrollResultDTO for persistence. */
+    /** Maps a computed record to its persistence DTO. */
     private PayrollResultDTO toResultDTO(PayrollRecord rec) {
         PayrollResultDTO dto = new PayrollResultDTO();
         dto.empID = rec.getEmpID();
@@ -308,17 +288,18 @@ public class PayrollPresenterImpl implements PayrollPresenter {
         return dto;
     }
 
-    /** Format a double as a locale number string. */
     private String fmt(double value) {
         return String.format("%.2f", value);
     }
 
-    /** Format with currency symbol. */
+    /** Formats a value with the appropriate currency prefix when known. */
     private String fmt(double value, String currencyCode) {
-        if (currencyCode == null) return String.format("%,.2f", value);
-        
+        if (currencyCode == null) {
+            return String.format("%,.2f", value);
+        }
+
         String symbol = switch (currencyCode) {
-            case "INR" -> "₹";
+            case "INR" -> "Rs";
             case "USD" -> "$";
             case "SGD" -> "S$";
             default -> currencyCode + " ";
@@ -330,4 +311,3 @@ public class PayrollPresenterImpl implements PayrollPresenter {
         return value == null ? "" : value.trim().toLowerCase(Locale.ROOT);
     }
 }
-

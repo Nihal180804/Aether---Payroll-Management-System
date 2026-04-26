@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP034
+Employee Name    : Neha Wei
+Department       : Finance
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP034-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 150,367.04
+Overtime Pay     : INR 1,281.54
+Bonus Payout     : INR 24,810.56
+Reimbursement    : INR 7,874.99
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 18,044.04
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 18,964.52
+LOP Penalty      : INR 6,834.87
+--------------------------------------------------
+Gross Pay        : INR 144,813.71
+Net Pay          : INR 139,084.97
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

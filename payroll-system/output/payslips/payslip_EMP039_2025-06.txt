@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP039
+Employee Name    : Arjun Babu
+Department       : Legal
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP039-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 85,911.65
+Overtime Pay     : INR 2,196.60
+Bonus Payout     : INR 12,886.75
+Reimbursement    : INR 3,340.42
+Gratuity         : INR 4,130.37
+--------------------------------------------------
+PF Deduction     : INR 10,309.40
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 7,107.48
+LOP Penalty      : INR 3,905.07
+--------------------------------------------------
+Gross Pay        : INR 84,203.18
+Net Pay          : INR 80,465.22
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

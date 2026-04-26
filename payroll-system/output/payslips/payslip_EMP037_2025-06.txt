@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP037
+Employee Name    : Priya Smith
+Department       : Logistics
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP037-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 107,000.88
+Overtime Pay     : INR 3,647.76
+Bonus Payout     : INR 21,400.18
+Reimbursement    : INR 4,271.26
+Gratuity         : INR 5,144.27
+--------------------------------------------------
+PF Deduction     : INR 12,840.11
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 7,956.18
+LOP Penalty      : INR 4,863.68
+--------------------------------------------------
+Gross Pay        : INR 105,784.96
+Net Pay          : INR 109,826.86
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

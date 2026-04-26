@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP033
+Employee Name    : Neha Iyer
+Department       : Human Resources
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP033-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 64,822.42
+Overtime Pay     : INR 0.00
+Bonus Payout     : INR 0.00
+Reimbursement    : INR 2,409.57
+Gratuity         : INR 3,116.46
+--------------------------------------------------
+PF Deduction     : INR 7,778.69
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 4,737.84
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 64,822.42
+Net Pay          : INR 52,452.23
+Bonus Arrears    : INR 3,241.12
+Payslip Status   : READY
+==================================================

@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP001
+Employee Name    : Divya Verma
+Department       : Human Resources
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP001-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 38,084.17
+Overtime Pay     : INR 2,921.23
+Bonus Payout     : INR 3,046.73
+Reimbursement    : INR 3,194.39
+Gratuity         : INR 1,830.97
+--------------------------------------------------
+PF Deduction     : INR 4,570.10
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 355.38
+LOP Penalty      : INR 1,731.10
+--------------------------------------------------
+Gross Pay        : INR 39,274.30
+Net Pay          : INR 38,864.74
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

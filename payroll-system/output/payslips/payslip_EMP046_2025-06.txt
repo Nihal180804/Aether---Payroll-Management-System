@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP046
+Employee Name    : John Reddy
+Department       : Logistics
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP046-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 81,739.84
+Overtime Pay     : INR 2,089.94
+Bonus Payout     : INR 6,539.19
+Reimbursement    : INR 7,223.98
+Gratuity         : INR 3,929.80
+--------------------------------------------------
+PF Deduction     : INR 9,808.78
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 3,517.61
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 83,829.77
+Net Pay          : INR 82,209.58
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

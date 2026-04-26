@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP015
+Employee Name    : Li Smith
+Department       : Operations
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP015-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 32,145.63
+Overtime Pay     : INR 821.91
+Bonus Payout     : INR 6,429.13
+Reimbursement    : INR 4,484.19
+Gratuity         : INR 1,545.46
+--------------------------------------------------
+PF Deduction     : INR 3,857.48
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 0.00
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 32,967.53
+Net Pay          : INR 38,310.48
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

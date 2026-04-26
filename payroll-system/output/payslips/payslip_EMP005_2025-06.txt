@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP005
+Employee Name    : Ayesha Kumar
+Department       : Design
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP005-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 80,262.62
+Overtime Pay     : INR 2,052.17
+Bonus Payout     : INR 4,013.13
+Reimbursement    : INR 5,000.00
+Gratuity         : INR 3,858.78
+--------------------------------------------------
+PF Deduction     : INR 9,631.51
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 3,363.98
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 82,314.79
+Net Pay          : INR 76,037.21
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

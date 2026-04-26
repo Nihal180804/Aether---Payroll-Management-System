@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP014
+Employee Name    : Rahul Iyer
+Department       : Engineering
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP014-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 54,422.56
+Overtime Pay     : INR 4,174.46
+Bonus Payout     : INR 5,442.26
+Reimbursement    : INR 7,157.08
+Gratuity         : INR 2,616.47
+--------------------------------------------------
+PF Deduction     : INR 6,530.71
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 1,204.97
+LOP Penalty      : INR 2,473.75
+--------------------------------------------------
+Gross Pay        : INR 56,123.27
+Net Pay          : INR 58,986.56
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

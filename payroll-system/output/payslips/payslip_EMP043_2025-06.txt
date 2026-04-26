@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP043
+Employee Name    : Rahul Reddy
+Department       : Finance
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP043-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 125,106.00
+Overtime Pay     : INR 0.00
+Bonus Payout     : INR 16,513.99
+Reimbursement    : INR 827.71
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 15,012.72
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 11,722.05
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 125,106.00
+Net Pay          : INR 113,083.48
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

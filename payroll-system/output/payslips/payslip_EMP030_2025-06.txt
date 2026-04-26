@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP030
+Employee Name    : Sarah Kumar
+Department       : Product
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP030-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 108,188.58
+Overtime Pay     : INR 6,454.43
+Bonus Payout     : INR 5,950.37
+Reimbursement    : INR 5,000.00
+Gratuity         : INR 5,201.37
+--------------------------------------------------
+PF Deduction     : INR 12,982.63
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 21,647.32
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 114,643.02
+Net Pay          : INR 90,327.72
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

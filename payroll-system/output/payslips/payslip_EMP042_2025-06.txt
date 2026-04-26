@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP042
+Employee Name    : Divya Patel
+Department       : Operations
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP042-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 39,561.38
+Overtime Pay     : INR 337.17
+Bonus Payout     : INR 4,747.37
+Reimbursement    : INR 5,362.29
+Gratuity         : INR 1,901.99
+--------------------------------------------------
+PF Deduction     : INR 4,747.37
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 169.75
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 39,898.55
+Net Pay          : INR 43,604.15
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

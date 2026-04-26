@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP035
+Employee Name    : Amit Mitchell
+Department       : Operations
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP035-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 43,733.20
+Overtime Pay     : INR 3,354.54
+Bonus Payout     : INR 6,559.98
+Reimbursement    : INR 1,478.73
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 5,247.98
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 649.13
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 47,087.73
+Net Pay          : INR 47,251.11
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

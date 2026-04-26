@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP026
+Employee Name    : Neha Verma
+Department       : Finance
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP026-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 69,573.25
+Overtime Pay     : INR 2,964.77
+Bonus Payout     : INR 9,183.67
+Reimbursement    : INR 9,377.73
+Gratuity         : INR 3,344.87
+--------------------------------------------------
+PF Deduction     : INR 8,348.79
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 2,252.28
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 72,538.02
+Net Pay          : INR 78,225.27
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

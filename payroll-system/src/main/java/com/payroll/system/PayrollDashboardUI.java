@@ -33,15 +33,6 @@ import java.util.List;
  * CLASS: PayrollDashboardUI  (com.payroll.system)
  * =============================================================================
  * Modern SaaS-style payroll dashboard built with JavaFX.
- *
- * COUPLING DESIGN: This class imports NO class from model, service, pattern,
- * exception, or util packages. All backend calls go through PayrollPresenter.
- * Swap the UI entirely to a CLI or REST controller without touching any backend.
- *
- * ENTRY POINT:
- *   PayrollPresenterImpl is the default implementation (MockPayrollRepository).
- *   To switch to real DB: new PayrollPresenterImpl(new RealPayrollRepository(...), ...)
- * =============================================================================
  */
 public class PayrollDashboardUI extends Application {
 
@@ -68,12 +59,10 @@ public class PayrollDashboardUI extends Application {
     private Label          dbStatusLabel;
     private Label          empCountLabel;
 
-    // ── Navigation tracking ───────────────────────────────────────────────────
     private Button         activeNavBtn;
     private String         currentView = "Dashboard";
 
     // ═══════════════════════════════════════════════════════════════════════════
-    //  JavaFX Entry
     // ═══════════════════════════════════════════════════════════════════════════
 
     public static void main(String[] args) {
@@ -201,7 +190,6 @@ public class PayrollDashboardUI extends Application {
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
-    //  Navigation
     // ═══════════════════════════════════════════════════════════════════════════
 
     private void showView(String viewName) {
@@ -653,7 +641,6 @@ public class PayrollDashboardUI extends Application {
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
-    //  Widget Factories
     // ═══════════════════════════════════════════════════════════════════════════
 
     private VBox statCard(String title, String value, String color, String icon) {
@@ -954,3 +941,4 @@ public class PayrollDashboardUI extends Application {
         public String getStatus()     { return status.get(); }
     }
 }
+

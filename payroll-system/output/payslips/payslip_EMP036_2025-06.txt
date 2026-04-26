@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP036
+Employee Name    : Amit Iyer
+Department       : Human Resources
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP036-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 129,277.81
+Overtime Pay     : INR 0.00
+Bonus Payout     : INR 10,342.22
+Reimbursement    : INR 6,944.15
+Gratuity         : INR 0.00
+--------------------------------------------------
+PF Deduction     : INR 15,513.34
+PT Deduction     : INR 0.00
+TDS Deduction    : INR 30,087.92
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 129,277.81
+Net Pay          : INR 100,042.20
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================

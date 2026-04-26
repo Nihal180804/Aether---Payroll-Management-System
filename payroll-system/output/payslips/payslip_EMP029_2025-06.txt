@@ -1,0 +1,26 @@
+==================================================
+         AETHER PAYROLL SOLUTIONS
+==================================================
+Employee ID      : EMP029
+Employee Name    : Amit Sharma
+Department       : Human Resources
+Pay Period       : 2025-06
+Record ID        : PAYSLIP-EMP029-2025-06
+Batch ID         : PAYSLIP-EXPORT
+--------------------------------------------------
+Basic Pay        : INR 134,028.64
+Overtime Pay     : INR 3,426.87
+Bonus Payout     : INR 16,083.44
+Reimbursement    : INR 3,912.30
+Gratuity         : INR 6,443.68
+--------------------------------------------------
+PF Deduction     : INR 16,083.44
+PT Deduction     : INR 200.00
+TDS Deduction    : INR 13,866.94
+LOP Penalty      : INR 0.00
+--------------------------------------------------
+Gross Pay        : INR 137,455.51
+Net Pay          : INR 126,370.31
+Bonus Arrears    : INR 0.00
+Payslip Status   : READY
+==================================================
