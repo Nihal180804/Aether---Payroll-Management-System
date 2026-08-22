@@ -123,7 +123,7 @@ public class PayrollPresenterImpl implements PayrollPresenter {
                     results.add(new PayrollResultViewModel(
                             batchId + "-" + id, id, name, dept,
                             bpay, "-", "-", "-", "0.00",
-                            "SKIPPED - MISSING_WORK_STATE"));
+                            "Skipped (no work state)"));
                     repo.logProcessingError(batchId, id, "MISSING_WORK_STATE: employee skipped from batch");
                 }
             }
@@ -232,12 +232,12 @@ public class PayrollPresenterImpl implements PayrollPresenter {
         if (rec.isFlaggedForHrReview()) {
             String reason = rec.getHrReviewReason();
             if (reason != null && reason.contains("NEGATIVE_NET_PAY")) {
-                status = "NEGATIVE_NET_PAY -> arrears set";
+                status = "Negative net → arrears";
             } else {
-                status = reason != null ? reason : "HR Review Required";
+                status = reason != null ? reason : "HR review required";
             }
         } else if (rec.getBonusArrears() > 0) {
-            status = "MISSING_PERFORMANCE_RATING -> bonus queued";
+            status = "Bonus queued (no rating)";
         } else {
             String warnLine = allAuditEntries.stream()
                     .filter(e -> e.contains("[WARN]") && e.contains("EmpID=" + rec.getEmpID()))
@@ -245,9 +245,9 @@ public class PayrollPresenterImpl implements PayrollPresenter {
                     .orElse(null);
             if (warnLine != null) {
                 if (warnLine.contains("MISSING_TAX_REGIME")) {
-                    status = "MISSING_TAX_REGIME -> defaulted OLD";
+                    status = "Tax regime → OLD";
                 } else if (warnLine.contains("EXCEEDS_CLAIM_LIMIT")) {
-                    status = "EXCEEDS_CLAIM_LIMIT -> claim capped";
+                    status = "Claim capped (over limit)";
                 } else {
                     status = "Warning (see Audit Log)";
                 }

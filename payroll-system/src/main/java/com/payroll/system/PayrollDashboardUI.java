@@ -95,6 +95,8 @@ public class PayrollDashboardUI extends Application {
 
         Scene scene = new Scene(root, 1280, 800);
         scene.getStylesheets().clear();
+        scene.getStylesheets().add("data:text/css;base64," + java.util.Base64.getEncoder()
+                .encodeToString(darkTableCss().getBytes(java.nio.charset.StandardCharsets.UTF_8)));
         primaryStage.setScene(scene);
         primaryStage.setTitle("Aether — Payroll Management System");
         primaryStage.setMinWidth(1100);
@@ -293,23 +295,24 @@ public class PayrollDashboardUI extends Application {
 
         TableView<EmployeeRowModel> table = new TableView<>(employeeList);
         table.setStyle(tableStyle());
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        // 13 columns won't fit a constrained width without clipping; keep real widths and scroll.
+        table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
         table.setPlaceholder(new Label("No employees loaded."));
 
         table.getColumns().addAll(
             col("EmpID",      "empID",      100),
             col("Name",       "name",       160),
-            col("Department", "department", 140),
-            col("Grade",      "grade",       70),
-            col("Basic Pay",  "basicPay",   120),
-            col("LOP Days",   "leaveWithoutPay", 80),
-            col("OT Hours",   "overtimeHours", 90),
-            col("Pending Claims", "pendingClaims", 130),
-            col("Approved Reimb.", "approvedReimbursement", 140),
-            col("Country",    "country",     70),
-            col("Tax Regime", "taxRegime",  100),
-            col("Work State", "state",      120),
-            col("Years",      "yearsService", 75)
+            col("Department", "department", 150),
+            col("Grade",      "grade",       90),
+            col("Basic Pay",  "basicPay",   130),
+            col("LOP Days",   "leaveWithoutPay", 100),
+            col("OT Hours",   "overtimeHours", 100),
+            col("Pending Claims", "pendingClaims", 150),
+            col("Approved Reimb.", "approvedReimbursement", 160),
+            col("Country",    "country",     90),
+            col("Tax Regime", "taxRegime",  120),
+            col("Work State", "state",      140),
+            col("Years",      "yearsService", 90)
         );
 
         VBox.setVgrow(table, Priority.ALWAYS);
@@ -339,8 +342,11 @@ public class PayrollDashboardUI extends Application {
 
         ProgressBar progress  = new ProgressBar(0);
         progress.setMaxWidth(Double.MAX_VALUE);
-        progress.setStyle("-fx-accent: #6366f1; -fx-pref-height: 6px;");
+        progress.setStyle("-fx-accent: #6366f1; -fx-pref-height: 12px;");
+        progress.setMinHeight(12);
         progress.setVisible(false);
+        progress.setManaged(false);   // no reserved gap until a run starts
+        progress.managedProperty().bind(progress.visibleProperty());
 
         Label statusLabel = styledLabel("Ready. Configure batch details above and click Run Payroll.",
                 13, "#94a3b8", false);
@@ -361,15 +367,14 @@ public class PayrollDashboardUI extends Application {
         table.setVisible(!payrollResults.isEmpty());
 
         table.getColumns().addAll(
-            col("Record ID",  "recordID",  150),
-            col("ID",         "empID",      75),
-            col("Name",       "name",      140),
-            col("Department", "department",120),
-            col("Basic Pay",  "basicPay",  110),
-            col("PF",         "pf",         90),
-            col("TDS",        "tds",        90),
-            col("PT",         "pt",         75),
-            col("Net Pay",    "netPay",    110),
+            col("ID",         "empID",      90),
+            col("Name",       "name",      160),
+            col("Department", "department",150),
+            col("Basic Pay",  "basicPay",  120),
+            col("PF",         "pf",        100),
+            col("TDS",        "tds",       100),
+            col("PT",         "pt",         80),
+            col("Net Pay",    "netPay",    120),
             statusCol()
         );
 
@@ -521,7 +526,7 @@ public class PayrollDashboardUI extends Application {
             styledLabel("Compliance Reports", 16, "#e2e8f0", true)
         );
 
-        String[] reportTypes = {"Payroll Summary (PDF)", "TDS Report", "PF Report",
+        String[] reportTypes = {"Payroll Summary", "TDS Report", "PF Report",
                                 "Reimbursement Summary", "Audit Trail Export"};
         for (String r : reportTypes) {
             HBox card = new HBox(14);
@@ -530,17 +535,121 @@ public class PayrollDashboardUI extends Application {
             card.setStyle("-fx-background-color: #1e2435; -fx-background-radius: 10; " +
                           "-fx-border-color: #2d3748; -fx-border-radius: 10;");
             Label lbl = styledLabel(r, 14, "#e2e8f0", false);
-            Button dl  = ghostBtn("⬇ Download");
+            Button dl  = solidBtn("⬇  Download", "#10b981", "#059669");
             dl.setDisable(payrollResults.isEmpty());
-            dl.setOnAction(e -> showAlert(Alert.AlertType.INFORMATION, r,
-                    payrollResults.isEmpty()
-                        ? "No payroll has been run yet.\nRun a batch first."
-                        : "Report generated: " + r + " — " + auditLogEntries.size() + " audit entries included."));
+            dl.setOnAction(e -> downloadReport(r, dl.getScene().getWindow()));
             card.getChildren().addAll(lbl, new Spacer(), dl);
             root.getChildren().add(card);
         }
 
-        return root;
+        ScrollPane scroll = new ScrollPane(root);
+        scroll.setFitToWidth(true);
+        scroll.setStyle("-fx-background-color: transparent; -fx-background: transparent;");
+        return scroll;
+    }
+
+    /** Builds the requested compliance report from the latest payroll data and saves it to a file. */
+    private void downloadReport(String reportType, javafx.stage.Window owner) {
+        if (payrollResults.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, reportType, "No payroll has been run yet.\nRun a batch first.");
+            return;
+        }
+
+        String masterCsv = presenter.getAllEmployeePayslipsCsv(currentPayPeriod);
+        String content;
+        String suggested;
+        // master CSV columns: 0 emp_id,1 name,2 dept,3 period,4 gross,5 tds,6 pf,7 pt,8 net,9 bonus,10 reimb,11 gratuity,12 status
+        switch (reportType) {
+            case "TDS Report" -> {
+                content = projectCsv(masterCsv, 5, "tds");
+                suggested = "tds_report_" + currentPayPeriod + ".csv";
+            }
+            case "PF Report" -> {
+                content = projectCsv(masterCsv, 6, "pf");
+                suggested = "pf_report_" + currentPayPeriod + ".csv";
+            }
+            case "Reimbursement Summary" -> {
+                content = projectCsv(masterCsv, 10, "reimbursement");
+                suggested = "reimbursement_summary_" + currentPayPeriod + ".csv";
+            }
+            case "Audit Trail Export" -> {
+                content = String.join(System.lineSeparator(), presenter.getAuditLog());
+                suggested = "audit_trail_" + currentPayPeriod + ".txt";
+            }
+            default -> { // Payroll Summary
+                content = masterCsv;
+                suggested = "payroll_summary_" + currentPayPeriod + ".csv";
+            }
+        }
+
+        javafx.stage.FileChooser chooser = new javafx.stage.FileChooser();
+        chooser.setTitle("Save " + reportType);
+        chooser.setInitialFileName(suggested);
+        java.io.File outDir = new java.io.File("output");
+        if (outDir.isDirectory()) {
+            chooser.setInitialDirectory(outDir);
+        }
+        chooser.getExtensionFilters().addAll(
+                new javafx.stage.FileChooser.ExtensionFilter("CSV", "*.csv"),
+                new javafx.stage.FileChooser.ExtensionFilter("Text", "*.txt"),
+                new javafx.stage.FileChooser.ExtensionFilter("All Files", "*.*"));
+
+        java.io.File file = chooser.showSaveDialog(owner);
+        if (file == null) {
+            return;
+        }
+        try {
+            java.nio.file.Files.writeString(file.toPath(), content, java.nio.charset.StandardCharsets.UTF_8);
+            int rows = Math.max(0, content.split("\\R").length - 1);
+            showAlert(Alert.AlertType.INFORMATION, reportType,
+                    "Saved " + rows + " rows to:\n" + file.getAbsolutePath());
+            updateStatusBar(reportType + " exported to " + file.getName());
+        } catch (java.io.IOException ex) {
+            showAlert(Alert.AlertType.ERROR, reportType, "Could not write file:\n" + ex.getMessage());
+        }
+    }
+
+    /** Projects the master payslip CSV down to id/name/department/period + one value column. */
+    private String projectCsv(String masterCsv, int valueColIndex, String valueHeader) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("employee_id,name,department,pay_period,").append(valueHeader).append(System.lineSeparator());
+        String[] lines = masterCsv.split("\\R");
+        for (int i = 1; i < lines.length; i++) {          // skip header row
+            if (lines[i].isBlank()) continue;
+            String[] c = parseCsvLine(lines[i]);
+            if (c.length <= valueColIndex) continue;
+            sb.append(quoteCsv(c[0])).append(',')
+              .append(quoteCsv(c[1])).append(',')
+              .append(quoteCsv(c[2])).append(',')
+              .append(quoteCsv(c[3])).append(',')
+              .append(c[valueColIndex]).append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+
+    private static String quoteCsv(String v) {
+        if (v == null) return "";
+        return "\"" + v.replace("\"", "\"\"") + "\"";
+    }
+
+    /** Minimal RFC-4180 line parser (handles quoted fields and escaped quotes). */
+    private static String[] parseCsvLine(String line) {
+        java.util.List<String> values = new java.util.ArrayList<>();
+        StringBuilder cur = new StringBuilder();
+        boolean quoted = false;
+        for (int i = 0; i < line.length(); i++) {
+            char ch = line.charAt(i);
+            if (ch == '"') {
+                if (quoted && i + 1 < line.length() && line.charAt(i + 1) == '"') { cur.append('"'); i++; }
+                else quoted = !quoted;
+            } else if (ch == ',' && !quoted) {
+                values.add(cur.toString()); cur.setLength(0);
+            } else {
+                cur.append(ch);
+            }
+        }
+        values.add(cur.toString());
+        return values.toArray(String[]::new);
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
@@ -552,20 +661,83 @@ public class PayrollDashboardUI extends Application {
         root.setPadding(new Insets(28, 32, 28, 32));
         root.setStyle("-fx-background-color: #0f1117;");
 
-        VBox card = glassCard();
-        card.getChildren().addAll(
-            styledLabel("System Settings", 16, "#e2e8f0", true),
+        root.getChildren().add(styledLabel("Settings", 18, "#e2e8f0", true));
+
+        // ── Editable payroll configuration ────────────────────────────────────
+        VBox configCard = glassCard();
+
+        ComboBox<String> periodBox = new ComboBox<>(FXCollections.observableArrayList("2025-06", "2026-04"));
+        periodBox.setEditable(true);
+        periodBox.setValue(currentPayPeriod);
+        periodBox.setMaxWidth(Double.MAX_VALUE);
+        periodBox.setStyle("-fx-pref-height: 36px;");
+        VBox periodBoxWrap = new VBox(6,
+                styledLabel("Active Pay Period", 12, "#64748b", false), periodBox);
+        HBox.setHgrow(periodBoxWrap, Priority.ALWAYS);
+
+        TextField batchField = formField("Batch ID", currentBatchId);
+        HBox row = new HBox(16, periodBoxWrap, labeled("Default Batch ID", batchField));
+
+        Button applyBtn = primaryBtn("Apply Settings");
+        applyBtn.setOnAction(e -> {
+            String p = periodBox.getEditor().getText().trim();
+            if (p.isBlank()) {
+                p = periodBox.getValue() == null ? "" : periodBox.getValue().trim();
+            }
+            if (p.isBlank()) {
+                showAlert(Alert.AlertType.WARNING, "Invalid Pay Period", "Pay period cannot be empty.");
+                return;
+            }
+            currentPayPeriod = p;
+            String b = batchField.getText().trim();
+            if (!b.isBlank()) {
+                currentBatchId = b;
+            }
+            loadEmployeesFromPresenter();
+            updateStatusBar("Settings applied — pay period " + currentPayPeriod
+                    + " (" + presenter.getEmployeeCount() + " employees)");
+            showView("Settings");   // refresh the status figures below
+        });
+
+        configCard.getChildren().addAll(
+            styledLabel("Payroll Configuration", 16, "#e2e8f0", true),
+            styledLabel("Applies across Dashboard, Employees, Payslips and Reports.",
+                    12, "#94a3b8", false),
+            row,
+            applyBtn
+        );
+
+        // ── System status + maintenance actions ───────────────────────────────
+        VBox infoCard = glassCard();
+
+        Button reloadBtn = ghostBtn("⟳ Reload Employees");
+        reloadBtn.setOnAction(e -> {
+            loadEmployeesFromPresenter();
+            updateStatusBar("Employee data reloaded from database");
+            showView("Settings");
+        });
+        Button clearAuditBtn = ghostBtn("🗑 Clear Audit Log");
+        clearAuditBtn.setOnAction(e -> {
+            presenter.clearAuditLog();
+            syncAuditLog();
+            updateStatusBar("Audit log cleared");
+            showView("Settings");
+        });
+        HBox maintRow = new HBox(10, reloadBtn, clearAuditBtn);
+
+        infoCard.getChildren().addAll(
+            styledLabel("System Status", 16, "#e2e8f0", true),
             separator(),
             settingRow("Active Data Source",     presenter.getDbStatus()),
             settingRow("Active Pay Period",       currentPayPeriod),
+            settingRow("Default Batch ID",        currentBatchId),
             settingRow("Total Employees",         String.valueOf(presenter.getEmployeeCount())),
             settingRow("Audit Entries",           String.valueOf(presenter.getAuditLog().size())),
             separator(),
-            styledLabel("To switch to real DB: replace MockPayrollRepository in PayrollPresenterImpl.",
-                    12, "#475569", false)
+            maintRow
         );
 
-        root.getChildren().add(card);
+        root.getChildren().addAll(configCard, infoCard);
         return root;
     }
 
@@ -707,6 +879,17 @@ public class PayrollDashboardUI extends Application {
         return btn;
     }
 
+    private Button solidBtn(String text, String base, String hover) {
+        Button btn = new Button(text);
+        btn.setFont(Font.font("Inter", FontWeight.SEMI_BOLD, 13));
+        btn.setPadding(new Insets(9, 20, 9, 20));
+        String s = "-fx-background-color: %s; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand;";
+        btn.setStyle(String.format(s, base));
+        btn.setOnMouseEntered(e -> { if (!btn.isDisabled()) btn.setStyle(String.format(s, hover)); });
+        btn.setOnMouseExited(e -> btn.setStyle(String.format(s, base)));
+        return btn;
+    }
+
     private Button ghostBtn(String text) {
         Button btn = new Button(text);
         btn.setFont(Font.font("Inter", 12));
@@ -769,19 +952,23 @@ public class PayrollDashboardUI extends Application {
     private TableColumn<PayrollRowModel, String> statusCol() {
         TableColumn<PayrollRowModel, String> c = new TableColumn<>("Status");
         c.setCellValueFactory(new PropertyValueFactory<>("status"));
-        c.setPrefWidth(180);
+        c.setPrefWidth(240);
         c.setCellFactory(col -> new TableCell<>() {
             @Override protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) { setText(null); setStyle(""); return; }
                 setText(item);
-                if (item.startsWith("✔"))
-                    setTextFill(Color.web("#22c55e"));
-                else if (item.startsWith("✗"))
-                    setTextFill(Color.web("#ef4444"));
+                String upper = item.toUpperCase(java.util.Locale.ROOT);
+                String color;
+                if (item.startsWith("✔") || upper.equals("OK"))
+                    color = "#22c55e";
+                else if (item.startsWith("✗") || upper.contains("SKIPPED")
+                        || upper.contains("ERROR") || upper.contains("NEGATIVE"))
+                    color = "#ef4444";
                 else
-                    setTextFill(Color.web("#f59e0b"));
-                setStyle("-fx-background-color: transparent;");
+                    color = "#f59e0b";
+                // Inline style beats the author stylesheet's .table-cell text fill.
+                setStyle("-fx-background-color: transparent; -fx-font-weight: bold; -fx-text-fill: " + color + ";");
             }
         });
         return c;
@@ -808,6 +995,99 @@ public class PayrollDashboardUI extends Application {
         return "-fx-background-color: #1e2435; -fx-border-color: #2d3748; " +
                "-fx-border-radius: 10; -fx-background-radius: 10; " +
                "-fx-table-cell-border-color: transparent;";
+    }
+
+    /** Dark-theme stylesheet for TableView rows, cells, headers and scrollbars. */
+    private String darkTableCss() {
+        return """
+            .table-view { -fx-background-color: transparent; -fx-table-cell-border-color: transparent; -fx-padding: 0; }
+            .table-view:focused { -fx-background-color: transparent; }
+
+            .table-view .column-header-background { -fx-background-color: #151a26; -fx-background-radius: 10 10 0 0; }
+            .table-view .column-header-background .filler { -fx-background-color: transparent; }
+            .table-view .column-header {
+                -fx-background-color: transparent;
+                -fx-border-color: transparent transparent #2d3748 transparent;
+                -fx-size: 44px;
+                -fx-padding: 0;
+            }
+            .table-view .column-header .label {
+                -fx-text-fill: #94a3b8; -fx-font-weight: bold; -fx-font-size: 12px;
+                -fx-alignment: CENTER-LEFT; -fx-padding: 0 12 0 12;
+            }
+            .table-view .filler { -fx-background-color: #151a26; }
+
+            .table-row-cell {
+                -fx-background-color: #1a1f2e;
+                -fx-border-color: transparent transparent #232a3d transparent;
+                -fx-table-cell-border-color: transparent;
+                -fx-cell-size: 40px;
+            }
+            .table-row-cell:odd { -fx-background-color: #1e2435; }
+            .table-row-cell:empty { -fx-background-color: transparent; -fx-border-color: transparent; }
+            .table-row-cell:hover { -fx-background-color: #2a3346; }
+            .table-row-cell:selected { -fx-background-color: #6366f133; }
+
+            .table-cell {
+                -fx-text-fill: #cbd5e1;
+                -fx-border-color: transparent;
+                -fx-padding: 0 12 0 12;
+                -fx-font-size: 13px;
+                -fx-alignment: CENTER-LEFT;
+            }
+            .table-row-cell:empty .table-cell { -fx-text-fill: transparent; }
+            .table-cell:selected { -fx-text-fill: #ffffff; }
+
+            .scroll-bar:horizontal { -fx-background-color: #151a26; -fx-pref-height: 14px; }
+            .scroll-bar:vertical { -fx-background-color: #151a26; -fx-pref-width: 14px; }
+            .scroll-bar .track { -fx-background-color: transparent; -fx-background-radius: 7; }
+            .scroll-bar .thumb {
+                -fx-background-color: #4b5678; -fx-background-radius: 7; -fx-background-insets: 2;
+            }
+            .scroll-bar .thumb:hover { -fx-background-color: #626f97; }
+            .scroll-bar .thumb:pressed { -fx-background-color: #6366f1; }
+            .scroll-bar .increment-button, .scroll-bar .decrement-button {
+                -fx-background-color: transparent; -fx-padding: 0;
+            }
+            .scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+                -fx-background-color: transparent; -fx-shape: " "; -fx-padding: 0;
+            }
+            .scroll-pane, .scroll-pane > .viewport { -fx-background-color: transparent; }
+            .scroll-pane .corner, .table-view .corner, .list-view .corner { -fx-background-color: transparent; }
+
+            .combo-box {
+                -fx-background-color: #252d3d; -fx-background-radius: 6;
+                -fx-border-color: #2d3748; -fx-border-radius: 6;
+            }
+            .combo-box:hover { -fx-border-color: #4b5563; }
+            .combo-box .list-cell { -fx-text-fill: #e2e8f0; -fx-background-color: transparent; -fx-padding: 4 8 4 8; }
+            .combo-box .arrow-button { -fx-background-color: transparent; }
+            .combo-box .arrow { -fx-background-color: #94a3b8; }
+            .combo-box-popup .list-view {
+                -fx-background-color: #1a1f2e; -fx-border-color: #2d3748;
+                -fx-border-radius: 6; -fx-background-radius: 6;
+            }
+            .combo-box-popup .list-view .list-cell {
+                -fx-text-fill: #cbd5e1; -fx-background-color: #1a1f2e; -fx-padding: 8 12 8 12;
+            }
+            .combo-box-popup .list-view .list-cell:filled:hover { -fx-background-color: #2a3346; -fx-text-fill: #ffffff; }
+            .combo-box-popup .list-view .list-cell:filled:selected { -fx-background-color: #6366f1; -fx-text-fill: #ffffff; }
+
+            .text-area { -fx-background-color: #0d0f14; -fx-background-radius: 8; -fx-text-fill: #cbd5e1; }
+            .text-area .content { -fx-background-color: #0d0f14; -fx-background-radius: 8; }
+            .text-area:focused { -fx-background-color: #0d0f14; -fx-background-radius: 8; }
+            .text-area .text { -fx-fill: #cbd5e1; }
+            .table-view .corner { -fx-background-color: transparent; }
+            .table-view .placeholder .label { -fx-text-fill: #64748b; }
+
+            .progress-bar > .track {
+                -fx-background-color: #232a3d; -fx-background-radius: 6; -fx-background-insets: 0;
+            }
+            .progress-bar > .bar {
+                -fx-background-color: -fx-accent; -fx-background-radius: 6; -fx-background-insets: 0; -fx-padding: 0;
+            }
+            .progress-bar:indeterminate > .bar { -fx-background-color: #6366f1; }
+            """;
     }
 
     private void showAlert(Alert.AlertType type, String title, String msg) {
